@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Alarm Manager Service’s documentation! &mdash; AlarmManager 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="AlarmManager 1.0.0 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> AlarmManager
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to <code class="docutils literal"><span class="pre">Alarm</span> <span class="pre">Manager</span></code> Service’s documentation!</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#alarm-manager-requests">Alarm Manager Requests</a></li>
+<li><a class="reference internal" href="#alarm-manager-authentication">Alarm Manager Authentication</a></li>
+<li><a class="reference internal" href="#alarm-manager-authorization">Alarm Manager Authorization</a></li>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#post-request">POST Request</a></li>
+<li><a class="reference internal" href="#delete-request">Delete Request</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error Handling</a></li>
+<li><a class="reference internal" href="#request-examples">Request Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">AlarmManager</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to <code class="docutils literal"><span class="pre">Alarm</span> <span class="pre">Manager</span></code> Service’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-alarm-manager-service-s-documentation">
+<h1>Welcome to <code class="docutils literal"><span class="pre">Alarm</span> <span class="pre">Manager</span></code> Service’s documentation!<a class="headerlink" href="#welcome-to-alarm-manager-service-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Alarm</span> <span class="pre">Manager</span></code> service is a Restful API that has a main objective: to trigger alarms related to the temporal approximation
+of an event and its weather conditions.
+This document describes the protocol used to send data to the API.</p>
+<p>Communication is done over HTTP using POST methods. Request is formatted as JSON, and the content
+type is <code class="docutils literal"><span class="pre">application/json</span></code>.</p>
+<p>Currently is in the <code class="docutils literal"><span class="pre">version</span> <span class="pre">1.0</span></code>.</p>
+</div>
+<div class="section" id="alarm-manager-requests">
+<h2>Alarm Manager Requests<a class="headerlink" href="#alarm-manager-requests" title="Permalink to this headline">¶</a></h2>
+<p>Alarm Manager requests can only assume two types.
+Only <code class="docutils literal"><span class="pre">POST</span></code> and <code class="docutils literal"><span class="pre">DELETE</span></code> http requests methods are allowed.
+The request body must have JSON formatting.
+The request data is appended on the body for <code class="docutils literal"><span class="pre">POST</span></code> request. The response body have JSON formatting.
+Every request must contain a valid <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>.
+Every bad request is returned with a message indicating the wrong/missing fields and a explanatory message for each one.</p>
+</div>
+<div class="section" id="alarm-manager-authentication">
+<h2>Alarm Manager Authentication<a class="headerlink" href="#alarm-manager-authentication" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Alarm</span> <span class="pre">Manager</span></code> service is authenticated over an external identify that must be trusted. The service need to be registered on the authentication central server and need to have the credentials. To be authenticated you need 2 steps/requests:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>POST</dt>
+<dd><ul class="first last">
+<li>Request: Send the username in order to mention the authentication intention.</li>
+<li>Response: Receive a nonce.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GET</dt>
+<dd><ul class="first last">
+<li>Request: Send the nonce digest concatenated with the password digest.</li>
+<li>Response: Receive a JSON Web Token (JWT).</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The digest function is <code class="docutils literal"><span class="pre">SHA256</span></code>.
+For the further requests this <code class="docutils literal"><span class="pre">JSON</span> <span class="pre">Web</span> <span class="pre">Token</span></code> will be used to confirm the service identity.</p>
+</div>
+<div class="section" id="alarm-manager-authorization">
+<h2>Alarm Manager Authorization<a class="headerlink" href="#alarm-manager-authorization" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Alarm</span> <span class="pre">Manager</span></code> service provides authorization using <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>. The authorization is completed in 3 steps: the first concerns the registration of a redirect url, to receive the grant, and the desired scopes. The second and the third are related to obtaining the grant and the OAuth 2.0 token respectively. The first and second step must contain an <code class="docutils literal"><span class="pre">JWT-Bearer</span></code> to provide authentication and check it over a centralized well trusted Authentication Service and only provide access to the service if the client is authenticated.</p>
+<p>The service export 2 interfaces to handle all the communications:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Authorization Management</dt>
+<dd><p class="first">An interface that allows to create multiple apps on the service. To accomplish this the client must be authenticated and indicate one url to where the grant will be redirected and the desired scopes, to get different views from the service. The service will respond with a <cite>client id</cite> and a <cite>client secret</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">alarmManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">authorization_managment</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Request Body</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">redirect_uri</span></code>
+- The <code class="docutils literal"><span class="pre">url</span></code> where the grant will be redirected. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">scopes</span></code>
+- The <code class="docutils literal"><span class="pre">scope</span></code> is the desired permissions, considering that exists permissions that a client cant get. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">jwt-bearer</span></code>
+- The <code class="docutils literal"><span class="pre">jwt-bearer</span></code> is the token that contain information about the client and permit check if him is authenticated. Type <strong>str</strong>.</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Return app information:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="s1">&#39;client_secret&#39;</span><span class="p">:</span> <span class="s1">&#39;4321&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="last">Internally the service gets the client identification when confirm his authenticity by contacting the authentication server.
+A client can have multiple apps and multiple views over the service.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Authorize</dt>
+<dd><p class="first last">An interface that provides 2 methods: one <cite>GET</cite> and one <cite>POST</cite>. The <cite>GET</cite> objective is provide a way to get the grant token and then exchange the grant with a <cite>OAuth 2.0</cite> token by calling the <cite>POST</cite>. Those methods were implemented by the library that the service use: flask oauthlib available at <a class="reference external" href="https://github.com/lepture/flask-oauthlib">github</a>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>There is only one main resource, that only allows <code class="docutils literal"><span class="pre">POST</span></code> and <code class="docutils literal"><span class="pre">DELETE</span></code> requests.
+For each request, the resource schedule <code class="docutils literal"><span class="pre">4</span> <span class="pre">jobs</span></code>, according to the supported alarms:</p>
+<ul class="simple">
+<li>Decision datetime</li>
+<li>Weather change</li>
+<li>Reminder (Alert 1 hour before)</li>
+<li>Closed event (When it’s time for the event)</li>
+</ul>
+<p>The first one runs once, at the decision datetime. It gets the event datetime decision, from the service that handle the event schedules, and schedule the three following jobs.
+The seconds one, runs every 1 hour and check for weather drastic changes, it compares the forecast weather at moment
+with the forecast done at event creation. Drastic weather changes mean differences above or equal 5 degrees, negatives
+or positives. The forecast is obtained by calling the weather service.
+The last ones only run once, one hour before and at the event time, respectively.
+When triggered all the jobs send a asynchronous request to a endpoint that should handle the alarm notification.</p>
+<p>The service is authenticated since it needs to be identified over the others, and as such also has <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> tokens with authorization permissions.
+Given 1 job the service internally will need to do a couple of requests:</p>
+<blockquote>
+<div><ul class="simple">
+<li>One <code class="docutils literal"><span class="pre">POST</span></code> to the endpoint that handle the notification - Decision datetime notification</li>
+<li>One <code class="docutils literal"><span class="pre">GET</span></code> to the schedule service to get the final schedule for a event - Get the decision datetime</li>
+<li>One or Many <code class="docutils literal"><span class="pre">GET</span></code> to the weather service to decide if it is critical change or not.</li>
+<li>One or Many <code class="docutils literal"><span class="pre">POST</span></code> to the endpoint that handle the notification - Weather change notification</li>
+<li>One <code class="docutils literal"><span class="pre">POST</span></code> to the endpoint that handle the notification - One hour before, reminder notification</li>
+<li>One <code class="docutils literal"><span class="pre">POST</span></code> to the endpoint that handle the notification - Event closed notification</li>
+</ul>
+</div></blockquote>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> follows always the same structure, it send the information in 2 or 3 fields:</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">type</span></code>
+- The <code class="docutils literal"><span class="pre">type</span></code> of the notification. Can assume multiple values(decision, weather, reminder and closed_event). Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <cite>id</cite> of the event. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">message</span></code>
+- The <cite>message</cite> is merely informative, it contains the temperature changes. It can be:</p>
+<blockquote>
+<div>‘ - weather forecast decreased x.’ and  ‘- weather forecast increased y.’ Type <strong>str</strong>.</div></blockquote>
+</div></blockquote>
+<div class="section" id="post-request">
+<h3>POST Request<a class="headerlink" href="#post-request" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows to schedule 1 jobs, that when runs create 3 new jobs in order to handle the 3 possible alarms:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">alarmManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">datetime</span></code>
+- The <code class="docutils literal"><span class="pre">datetime</span> <span class="pre">decision</span></code> of an event. After this datetime the event has a defined schedule. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">id</span></code>
+- The <cite>id</cite> of the event. It will only be used to get information about the weather and the final schedule of the respective event. Type <strong>str</strong>.</p>
+<dl class="last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="delete-request">
+<h3>Delete Request<a class="headerlink" href="#delete-request" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">Delete</span></code> request allows delete the schedules for the jobs related to 1 event:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">alarmManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">id</span></code>
+- The <code class="docutils literal"><span class="pre">id</span></code> of the event. It is used to get the jobs related to its. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<p>On all requests if an error occurs it is returned a json with the following format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">error</span> <span class="nb">type</span><span class="p">,</span>
+ <span class="s1">&#39;msg&#39;</span>  <span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+ <span class="s1">&#39;code&#39;</span> <span class="p">:</span> <span class="n">HTTP</span> <span class="n">code</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">error</span> <span class="pre">type</span></code> refers to the entity/method that triggered the error and the <code class="docutils literal"><span class="pre">message</span></code> is a hint to understand
+the error.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Create</span></code> - Internal database error performing an user insert.</li>
+</ul>
+<p>Most common errors:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---------------+------------------------+</span>
+<span class="o">|</span> <span class="n">HTTP</span>  <span class="n">Code</span>    <span class="o">|</span>      <span class="n">Description</span>       <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">400</span>       <span class="o">|</span>  <span class="n">Bad</span> <span class="n">Request</span>           <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">403</span>       <span class="o">|</span>  <span class="n">Forbidden</span>             <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">405</span>       <span class="o">|</span>  <span class="n">Method</span> <span class="n">Not</span> <span class="n">Allowed</span>    <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">500</span>       <span class="o">|</span>  <span class="n">Internal</span> <span class="n">Server</span> <span class="n">Error</span> <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+</pre></div>
+</div>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not provided: {“message”: “The browser (or proxy) sent a request that this server could not understand.”}</p>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not valid, meaning that you aren’t authorized: {‘message’: “You don’t have the permission to access the requested resource. It is either read-protected or not readable by the server.”}</p>
+</div>
+<div class="section" id="request-examples">
+<h2>Request Examples<a class="headerlink" href="#request-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here we provide examples to each method, using <a class="reference external" href="http://docs.python-requests.org/en/master/">Requests</a> and
+<a class="reference external" href="https://curl.haxx.se/">cURL</a>.</p>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">POST</span></code></dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5001/alarmManager/v1.0/&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="s1">&#39;23:38 26/12/2017&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;id&quot;: &quot;10&quot;, &quot;datetime&quot;: &quot;18:30 25/12/2017&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">alarmManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">DELETE</span></code></dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5001/alarmManager/v1.0/&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">DELETE</span> <span class="o">-</span><span class="n">G</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">alarmManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span> <span class="o">-</span><span class="n">d</span> <span class="nb">id</span><span class="o">=</span><span class="mi">7</span>  <span class="o">-</span><span class="n">d</span> <span class="n">access_token</span><span class="o">=</span><span class="n">helloworld</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, TeamUp.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+Alarm Manager 	- 5001
+Events Manager 	- 5002
+Facebook		- 5003
+Geolocation		- 5004
+Location		- 5005
+Schedule		- 5006
+UserProfiling	- 5007
+Proxy			- 5008
+Opw				- 5009
+Undergound		- 5010 
+Notifications   - 5011
+AppServer       - 5012
+Authentication  - 5013
+chatManager 	- 5014
+presenceManager - 5015
+smsManager 		- 5016
+pushNotification- 5017
+
+

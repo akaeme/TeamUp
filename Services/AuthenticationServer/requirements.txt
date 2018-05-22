@@ -1,0 +1,6 @@
+Flask==0.10.1
+coloredlogs==7.3
+Flask_RESTful==0.3.6
+Flask_SQLAlchemy==1.0
+cryptography==2.0.2
+PyJWT==1.5.3

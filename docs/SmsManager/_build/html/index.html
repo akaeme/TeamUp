@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to SMS Manager Service documentation! &mdash; SmsManager 1.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="SmsManager 1.1 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> SmsManager
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to <code class="docutils literal"><span class="pre">SMS</span> <span class="pre">Manager</span></code> Service documentation!</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#sms-manager-requests">SMS Manager Requests</a></li>
+<li><a class="reference internal" href="#sms-manager-authentication">SMS Manager Authentication</a></li>
+<li><a class="reference internal" href="#sms-manager-authorization">SMS Manager Authorization</a></li>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#post-request">POST Request</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error Handling</a></li>
+<li><a class="reference internal" href="#request-examples">Request Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">SmsManager</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to <code class="docutils literal"><span class="pre">SMS</span> <span class="pre">Manager</span></code> Service documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-sms-manager-service-documentation">
+<h1>Welcome to <code class="docutils literal"><span class="pre">SMS</span> <span class="pre">Manager</span></code> Service documentation!<a class="headerlink" href="#welcome-to-sms-manager-service-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">SMS</span> <span class="pre">Manager</span></code> service is a RestFul API that sends SMS using PLIVO’s API.
+This document describes the protocol used to send data to the API and the returning response to the client.</p>
+<p>Communication is done over HTTP using its methods. The response is formatted as JSON,
+and the content type of both is <code class="docutils literal"><span class="pre">application/json</span></code>.</p>
+<p>Currently is in the <code class="docutils literal"><span class="pre">version</span> <span class="pre">1.1</span></code>.</p>
+</div>
+<div class="section" id="sms-manager-requests">
+<h2>SMS Manager Requests<a class="headerlink" href="#sms-manager-requests" title="Permalink to this headline">¶</a></h2>
+<p>SMS Manager requests can only assume one type.
+The request body must have JSON formatting.
+The request data is appended on the body for <code class="docutils literal"><span class="pre">POST</span></code> requests. The response body has JSON formatting such as post requests.
+Only <code class="docutils literal"><span class="pre">POST</span></code> http request methods are allowed.
+Every request must contain a valid <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>.
+Every bad request is returned with a message indicating the wrong/missing fields and a explanatory message for each one.</p>
+</div>
+<div class="section" id="sms-manager-authentication">
+<h2>SMS Manager Authentication<a class="headerlink" href="#sms-manager-authentication" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">SMS</span> <span class="pre">Manager</span></code> service is authenticated over an external identify that must be trusted. The service need to be registered on the authentication central server and need to have the credentials. To be authenticated you need 2 steps/requests:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>POST</dt>
+<dd><ul class="first last">
+<li>Request: Send the username in order to mention the authentication intention.</li>
+<li>Response: Receive a nonce.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GET</dt>
+<dd><ul class="first last">
+<li>Request: Send the nonce digest concatenated with the password digest.</li>
+<li>Response: Receive a JSON Web Token (JWT).</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The digest function is <code class="docutils literal"><span class="pre">SHA256</span></code>.
+For the further requests this <code class="docutils literal"><span class="pre">JSON</span> <span class="pre">Web</span> <span class="pre">Token</span></code> will be used to confirm the service identity.</p>
+</div>
+<div class="section" id="sms-manager-authorization">
+<h2>SMS Manager Authorization<a class="headerlink" href="#sms-manager-authorization" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">SMS</span> <span class="pre">Manager</span></code> service provides authorization using <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>. The authorization is completed in 3 steps: the first concerns the registration of a redirect url, to receive the grant, and the desired scopes. The second and the third are related to obtaining the grant and the OAuth 2.0 token respectively. The first and second step must contain an <code class="docutils literal"><span class="pre">JWT-Bearer</span></code> to provide authentication and check it over a centralized well trusted Authentication Service and only provide access to the service if the client is authenticated.</p>
+<p>The service export 2 interfaces to handle all the communications:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Authorization Managment</dt>
+<dd><p class="first">An interface that allows to create multiple apps on the service. To accomplish this the client must be authenticated and indicate one url to where the grant will be redirected and the desired scopes, to get different views from the service. The service will respond with a <cite>client id</cite> and a <cite>client secret</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5002</span><span class="o">/</span><span class="n">smsManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">authorization_managment</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Request Body</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">redirect_uri</span></code>
+- The <code class="docutils literal"><span class="pre">url</span></code> where the grant will be redirected. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">scopes</span></code>
+- The <code class="docutils literal"><span class="pre">scope</span></code> is the desired permissions, considering that exists permissions that a client can’t get. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">jwt-bearer</span></code>
+- The <code class="docutils literal"><span class="pre">jwt-bearer</span></code> is the token that contain information about the client and permit check if him is authenticated. Type <strong>str</strong>.</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Return app information:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="s1">&#39;client_secret&#39;</span><span class="p">:</span> <span class="s1">&#39;4321&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="last">Internally the service gets the client identification when confirm his authenticity by contacting the authentication server.
+A client can have multiple apps and multiple views over the service.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Authorize</dt>
+<dd><p class="first last">An interface that provides 2 methods: one <cite>GET</cite> and one <cite>POST</cite>. The <cite>GET</cite> objective is provide a way to get the grant token and then exchange the grant with a <cite>OAuth 2.0</cite> token by calling the <cite>POST</cite>. Those methods were implemented by the library that the service use: flask oauthlib available at <a class="reference external" href="https://github.com/lepture/flask-oauthlib">github</a>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>There is only one main resource, that only allows <code class="docutils literal"><span class="pre">POST</span></code> requests.</p>
+<div class="section" id="post-request">
+<h3>POST Request<a class="headerlink" href="#post-request" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows to send SMSs given a list of phones number:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">smsManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">sendMessage</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">mobile_nr_list</span></code>
+- List of phones number. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">message</span></code>
+- Content of the message. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>On all requests if an error occurs it is returned a json with the following format::</dt>
+<dd>{‘ack’: ‘false’}</dd>
+</dl>
+<p>HTTP code error:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---------------+------------------------+</span>
+<span class="o">|</span> <span class="n">HTTP</span>  <span class="n">Code</span>    <span class="o">|</span>      <span class="n">Description</span>       <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">400</span>       <span class="o">|</span>  <span class="n">Bad</span> <span class="n">Request</span>           <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+</pre></div>
+</div>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not provided: {“message”: “The browser (or proxy) sent a request that this server could not understand.”}</p>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not valid, meaning that you aren’t authorized: {‘message’: “You don’t have the permission to access the requested resource. It is either read-protected or not readable by the server.”}</p>
+</div>
+<div class="section" id="request-examples">
+<h2>Request Examples<a class="headerlink" href="#request-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here we provide examples to each method, using <a class="reference external" href="http://docs.python-requests.org/en/master/">Requests</a> and
+<a class="reference external" href="https://curl.haxx.se/">cURL</a>.</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5015/smsManager/v1.1/sendMessage/&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mobile_nr_list&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;969857311&#39;</span><span class="p">,</span> <span class="s1">&#39;969857311&#39;</span><span class="p">],</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Hi from TeamUp!&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>curl -H &quot;Content-Type: application/json&quot; -X POST -d &#39;{&#39;mobile_nr_list&#39;: [&#39;969857311&#39;, &#39;969857311&#39;], &#39;message&#39;: &#39;Hi from TeamUp!&#39;, &#39;access_token&#39;: &#39;helloworld&#39;}&#39; http://127.0.0.1:5015/smsManager/v1.1/sendMessage/
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, TeamUp.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+PyMySQL==0.7.11
+coloredlogs==7.3
+sleekxmpp==1.3.3
+paho_mqtt==1.3.1

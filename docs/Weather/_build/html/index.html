@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Weather Proxy Service’s documentation! &mdash; Weather Service 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Weather Service 1.0.0 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Weather Service
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to <code class="docutils literal"><span class="pre">Weather</span> <span class="pre">Proxy</span></code> Service’s documentation!</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#weather-proxy-requests">Weather Proxy  Requests</a></li>
+<li><a class="reference internal" href="#weather-proxy-authentication">Weather Proxy Authentication</a></li>
+<li><a class="reference internal" href="#weather-proxy-authorization">Weather Proxy Authorization</a></li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+<li><a class="reference internal" href="#proxy-resource">Proxy Resource</a><ul>
+<li><a class="reference internal" href="#weather">Weather</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#alarm-manager-resource">Alarm Manager Resource</a><ul>
+<li><a class="reference internal" href="#create-alarm-weather">Create Alarm Weather</a></li>
+<li><a class="reference internal" href="#alarm-weather">Alarm Weather</a></li>
+<li><a class="reference internal" href="#alarm-weather-by-id">Alarm Weather By ID</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#request-examples">Request Examples</a></li>
+<li><a class="reference internal" href="#error-handling">Error Handling</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Weather Service</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to <code class="docutils literal"><span class="pre">Weather</span> <span class="pre">Proxy</span></code> Service’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-weather-proxy-service-s-documentation">
+<h1>Welcome to <code class="docutils literal"><span class="pre">Weather</span> <span class="pre">Proxy</span></code> Service’s documentation!<a class="headerlink" href="#welcome-to-weather-proxy-service-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Weather</span> <span class="pre">Proxy</span></code> API is a service that provides a 10 day weather forecast per location and a precise temperature for a given day and
+geographic coordinates.
+Our service works as proxy that communicate with two micro services and gives the mean of temperature of this two micro services,
+to reach more precise values. This micro services are: <code class="docutils literal"><span class="pre">OpenWeatherMap</span></code> API and <code class="docutils literal"><span class="pre">Wunderground</span></code> API
+This document describes the protocol used to send data to the API and the returning response to the client.</p>
+<p>Communication is done over HTTP using POST and GET methods. Both request and response are formatted as JSON,
+and the content type of both is <code class="docutils literal"><span class="pre">application/json</span></code>.</p>
+<p>Currently is in the <code class="docutils literal"><span class="pre">version</span> <span class="pre">1.0</span></code>.</p>
+</div>
+<div class="section" id="weather-proxy-requests">
+<h2>Weather Proxy  Requests<a class="headerlink" href="#weather-proxy-requests" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Weather</span> <span class="pre">Proxy</span> <span class="pre">Requests`</span></code> can assume multiple types according to the desired operation.
+Only <code class="docutils literal"><span class="pre">GET/POST/DELETE</span></code> http request methods are allowed.
+The request data is appended on the body for <code class="docutils literal"><span class="pre">POST</span></code> requests and on arguments for <code class="docutils literal"><span class="pre">GET</span></code>.
+The request and response body have JSON formatting.</p>
+</div>
+<div class="section" id="weather-proxy-authentication">
+<h2>Weather Proxy Authentication<a class="headerlink" href="#weather-proxy-authentication" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Weather</span> <span class="pre">Proxy</span></code> service is authenticated over an external identify that must be trusted. The service need to be registered on the authentication central server and need to have the credentials. To be authenticated you need 2 steps/requests:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>POST</dt>
+<dd><ul class="first last">
+<li>Request: Send the username in order to mention the authentication intention.</li>
+<li>Response: Receive a nonce.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GET</dt>
+<dd><ul class="first last">
+<li>Request: Send the nonce digest concatenated with the password digest.</li>
+<li>Response: Receive a JSON Web Token (JWT).</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The digest function is <code class="docutils literal"><span class="pre">SHA256</span></code>.
+For the further requests this <code class="docutils literal"><span class="pre">JSON</span> <span class="pre">Web</span> <span class="pre">Token</span></code> will be used to confirm the service identity.</p>
+</div>
+<div class="section" id="weather-proxy-authorization">
+<h2>Weather Proxy Authorization<a class="headerlink" href="#weather-proxy-authorization" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Weather</span> <span class="pre">Proxy</span></code> service provides authorization using <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>. The authorization is completed in 3 steps: the first concerns the registration of a redirect url, to receive the grant, and the desired scopes. The second and the third are related to obtaining the grant and the OAuth 2.0 token respectively. The first and second step must contain an <code class="docutils literal"><span class="pre">JWT-Bearer</span></code> to provide authentication and check it over a centralized well trusted Authentication Service and only provide access to the service if the client is autenticated.
+Weather needs to communicate with two or more services(OpenWeather and UndergroundWeather), and acts as a client for both.  Before any communication gets the OAuth 2.0 token using the same method as described before.</p>
+<p>The service export 2 interfaces to handle all the communications:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Authorization Managment</dt>
+<dd><p class="first">An interface that allows to create multiple apps on the service. To accomplish this the client must be authenticated and indicate one url to where the grant will be redirected and the desired scopes, to get different views from the service. The service will respond with a <cite>client id</cite> and a <cite>client secret</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">weatherproxy</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">authorization_managment</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Request Body</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">redirect_uri</span></code>
+- The <code class="docutils literal"><span class="pre">url</span></code> where the grant will be redirected. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">scopes</span></code>
+- The <code class="docutils literal"><span class="pre">scope</span></code> is the desired permissions, considering that exists permissions that a client cant get. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">jwt-bearer</span></code>
+- The <code class="docutils literal"><span class="pre">jwt-bearer</span></code> is the token that contain information about the client and permit check if him is authenticated. Type <strong>str</strong>.</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Return app information:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="s1">&#39;client_secret&#39;</span><span class="p">:</span> <span class="s1">&#39;4321&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="last">Internally the service gets the client identification when confirm his authenticity by contacting the authentication server.
+A client can have multiple apps and multiple views over the service.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Authorize</dt>
+<dd><p class="first last">An interface that provides 2 methods: one <cite>GET</cite> and one <cite>POST</cite>. The <cite>GET</cite> objective is provide a way to get the grant token and then exchange the grant with a <cite>OAuth 2.0</cite> token by calling the <cite>POST</cite>. Those methods were implemented by the library that the service use: flash oauthlib available at <a class="reference external" href="https://github.com/lepture/flask-oauthlib">github</a>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>The two main resources of this service are the <code class="docutils literal"><span class="pre">Proxy</span></code> and the <code class="docutils literal"><span class="pre">AlarmManager</span></code>. Both export methods according to its context.
+and there are a relation between <code class="docutils literal"><span class="pre">API</span></code> Resources and the <code class="docutils literal"><span class="pre">HTTP</span></code> Request methods.</p>
+</div>
+<div class="section" id="proxy-resource">
+<h2>Proxy Resource<a class="headerlink" href="#proxy-resource" title="Permalink to this headline">¶</a></h2>
+<p>Proxy requests can assume multiple types according to the desired operation.
+The request body must have <code class="docutils literal"><span class="pre">JSON</span></code> formatting. The request body also have JSON formatting.
+All the request parameters are appended to the <code class="docutils literal"><span class="pre">POST/GET</span></code> method body.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>HTTP  Methods</td>
+<td>API Methods</td>
+</tr>
+<tr class="row-even"><td>POST</td>
+<td><ul class="first last simple">
+<li>post Weather</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="weather">
+<h3>Weather<a class="headerlink" href="#weather" title="Permalink to this headline">¶</a></h3>
+<p>This method allow to <code class="docutils literal"><span class="pre">get</span></code> the temperature and the atmospheric conditions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">weatherproxy</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are allowed.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">day</span></code>
+- The number of the pretend day. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">hour</span></code>
+- The hour to search the weather. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">lat</span></code>
+- The latitude of location. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">long</span></code>
+- The longitude of location. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">It contains the temperature, atmospheric conditions at the  hour and the day specified in the requested body:</p>
+<p>Example:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;hour&quot;</span><span class="p">:</span> <span class="s2">&quot;22&quot;</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span> <span class="mf">8.935</span><span class="p">,</span> <span class="s2">&quot;condition&quot;</span><span class="p">:</span> <span class="s2">&quot;Clear&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="s2">&quot;9&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="alarm-manager-resource">
+<h2>Alarm Manager Resource<a class="headerlink" href="#alarm-manager-resource" title="Permalink to this headline">¶</a></h2>
+<p>This resource provides a group of methods to support the <code class="docutils literal"><span class="pre">alarm</span> <span class="pre">process</span></code> when a temperature is <code class="docutils literal"><span class="pre">higher</span></code> or <code class="docutils literal"><span class="pre">lower</span></code> than a defined <code class="docutils literal"><span class="pre">threshold</span></code>. This process is make with the implementation
+of one <code class="docutils literal"><span class="pre">job</span> <span class="pre">builder</span></code> that runs once every <code class="docutils literal"><span class="pre">hour</span></code> to check temperature changes.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>HTTP  Methods</td>
+<td>API Methods</td>
+</tr>
+<tr class="row-even"><td>POST</td>
+<td><ul class="first last simple">
+<li>create Alarm Weather</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td><blockquote class="first">
+<div><ul class="simple">
+<li>get Alarm Weather by ID</li>
+</ul>
+</div></blockquote>
+<blockquote class="last">
+<div><ul class="simple">
+<li>get Alarm Weather</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="create-alarm-weather">
+<h3>Create Alarm Weather<a class="headerlink" href="#create-alarm-weather" title="Permalink to this headline">¶</a></h3>
+<p>This method allows to <code class="docutils literal"><span class="pre">create</span></code> the geographic coordinates (latitude and longitude) and the schedule associated to a specific event:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">alarmWeather</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are allowed.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">datetime</span></code>
+- The decision data of the event. This data as following format - 11:00 16/11/2017.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">lat</span></code>
+- The latitude coordinates of the event.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">long</span></code>
+- The longitude coordinates of the event.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">id</span></code>
+- The id of the event in question.</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></p>
+</div></blockquote>
+<ul class="last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<blockquote>
+<div><p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="s1">&#39;11:00 16/11/2017&#39;</span><span class="p">,</span>
+<span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;40.63036952784689&#39;</span><span class="p">,</span>
+<span class="s1">&#39;long&#39;</span><span class="p">:</span> <span class="s1">&#39;-8.657569885253906&#39;</span><span class="p">,</span>
+<span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+<span class="s1">&#39;access_token&#39;</span><span class="p">:</span><span class="s1">&#39;helloworld&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="alarm-weather">
+<h3>Alarm Weather<a class="headerlink" href="#alarm-weather" title="Permalink to this headline">¶</a></h3>
+<p>This method allows to <code class="docutils literal"><span class="pre">get</span></code> the <code class="docutils literal"><span class="pre">two</span> <span class="pre">temperatures</span> <span class="pre">values</span></code> of the job weather. The value of <code class="docutils literal"><span class="pre">first</span> <span class="pre">temperature</span></code> is the temperature preview at the <cite>first moment`</cite>.
+If this value passes the define <code class="docutils literal"><span class="pre">threshold</span></code>, then there ìs a new temperature higher then the first. So this is the <code class="docutils literal"><span class="pre">second</span> <span class="pre">temperature</span></code>. In next job, the temperature
+number one is gonna be update to the value of the second temperature.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">alarmWeather</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">AlarmW</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The only filed is mandatory.</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></p>
+</div></blockquote>
+<ul class="last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">It contains the two temperatures (TEMP1 and TEMP2), the job ID and the event ID associated</p>
+<p>Example:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;Alarm_Weather&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="alarm-weather-by-id">
+<h3>Alarm Weather By ID<a class="headerlink" href="#alarm-weather-by-id" title="Permalink to this headline">¶</a></h3>
+<p>This method is similar to the Alarm Weather, but in this case allows to <code class="docutils literal"><span class="pre">get</span></code> the  <code class="docutils literal"><span class="pre">two</span> <span class="pre">temperatures</span> <span class="pre">values</span></code> of the job weather by the <code class="docutils literal"><span class="pre">event</span> <span class="pre">ID</span></code>.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">alarmWeather</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">AlarmW_ID</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are allowed.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The ID of the event. Type <strong>int</strong>.</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></p>
+</div></blockquote>
+<ul class="last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">It contains the two temperatures (TEMP1 and TEMP2), the job ID correspond to the event_id</p>
+<p>Example:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;Alarm_Weather&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">1</span><span class="p">]}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="request-examples">
+<h2>Request Examples<a class="headerlink" href="#request-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here we provide examples to each method, using <a class="reference external" href="http://docs.python-requests.org/en/master/">Requests</a> and
+<a class="reference external" href="https://curl.haxx.se/">cURL</a>.</p>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">Proxy</span> <span class="pre">Resource</span></code></dt>
+<dd><ul class="first simple">
+<li><code class="docutils literal"><span class="pre">POST</span></code></li>
+</ul>
+<dl class="docutils">
+<dt>Weather::</dt>
+<dd><p class="first last">requests.post(‘<a class="reference external" href="http://127.0.0.1:5008/Proxy">http://127.0.0.1:5008/Proxy</a>’, json={‘day’: 22, ‘hour’: 22, ‘lat’: ‘40.63036952784689’, ‘long’ : ‘-8.657569885253906’,’access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">day</span><span class="s1">&#39;: 22, &#39;</span><span class="n">hour</span><span class="s1">&#39;: 22, &#39;</span><span class="n">lat</span><span class="s1">&#39;: &#39;</span><span class="mf">40.63036952784689</span><span class="s1">&#39;, &#39;</span><span class="n">long</span><span class="s1">&#39; : &#39;</span><span class="o">-</span><span class="mf">8.657569885253906</span><span class="s1">&#39;,&#39;</span><span class="n">access_token</span><span class="s1">&#39;: &#39;</span><span class="n">helloworld</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">Proxy</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">Alarm</span> <span class="pre">Manager</span> <span class="pre">Resource</span></code></dt>
+<dd><ul class="first simple">
+<li><code class="docutils literal"><span class="pre">POST</span></code></li>
+</ul>
+<dl class="docutils">
+<dt>Alarm Weather::</dt>
+<dd><p class="first last">requests.post(‘<a class="reference external" href="http://127.0.0.1:5008/alarmWeather/v1.0">http://127.0.0.1:5008/alarmWeather/v1.0</a>’, json={‘datetime’: ‘11:00 16/11/2017’, ‘lat’: ‘40.63036952784689’, ‘long’ : ‘-8.657569885253906’, ‘id’: ‘1’,’access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">datetime</span><span class="s1">&#39;: &#39;</span><span class="mi">11</span><span class="p">:</span><span class="mi">00</span> <span class="mi">16</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">2017</span><span class="s1">&#39;, &#39;</span><span class="n">lat</span><span class="s1">&#39;: &#39;</span><span class="mf">40.63036952784689</span><span class="s1">&#39;, &#39;</span><span class="n">long</span><span class="s1">&#39; : &#39;</span><span class="o">-</span><span class="mf">8.657569885253906</span><span class="s1">&#39;, &#39;</span><span class="nb">id</span><span class="s1">&#39;: &#39;</span><span class="mi">1</span><span class="s1">&#39;,&#39;</span><span class="n">access_token</span><span class="s1">&#39;: &#39;</span><span class="n">helloworld</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">alarmWeather</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">GET</span></code></li>
+</ul>
+<dl class="docutils">
+<dt>Alarm Weather By ID::</dt>
+<dd><p class="first last">requests.get(‘<a class="reference external" href="http://127.0.0.1:5008/alarmWeather/v1.0/AlarmW_ID">http://127.0.0.1:5008/alarmWeather/v1.0/AlarmW_ID</a>’, params={‘event_id’: 3, ‘access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">GET</span> <span class="o">-</span><span class="n">G</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">alarmWeather</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">AlarmW_ID</span> <span class="o">-</span><span class="n">d</span> <span class="n">event_id</span><span class="o">=</span> <span class="mi">3</span> <span class="o">-</span><span class="n">d</span> <span class="n">access_token</span><span class="o">=</span><span class="n">helloworld</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Alarm Weather::</dt>
+<dd><p class="first last">requests.get(‘<a class="reference external" href="http://127.0.0.1:5008/alarmWeather/v1.0/AlarmW">http://127.0.0.1:5008/alarmWeather/v1.0/AlarmW</a>’, params={access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">GET</span> <span class="o">-</span><span class="n">G</span>  <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5008</span><span class="o">/</span><span class="n">alarmWeather</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">AlarmW</span> <span class="o">-</span><span class="n">d</span> <span class="n">access_token</span><span class="o">=</span><span class="n">helloworld</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">errorType</span></code>  refers to the entity/method that triggered the error and the <code class="docutils literal"><span class="pre">message</span></code> is a hint to understand the error.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">errorType</span><span class="p">,</span>
+ <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+ <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">HTTP</span> <span class="n">code</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">weather_change</span></code> - Error in weather_change resource.</li>
+<li><code class="docutils literal"><span class="pre">No</span> <span class="pre">forecast</span> <span class="pre">available</span></code> - Error that occurs when the day present on request body is not within the limits of the forecast.</li>
+</ul>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not provided: {“message”: “The browser (or proxy) sent a request that this server could not understand.”}</p>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not valid, meaning that you aren’t authorized: {‘message’: “You don’t have the permission to access the requested resource. It is either read-protected or not readable by the server.”}</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, TeamUp.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

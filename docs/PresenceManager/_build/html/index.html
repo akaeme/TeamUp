@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Presence Manager Service documentation! &mdash; PresenceManager 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="PresenceManager 1.0 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> PresenceManager
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to <code class="docutils literal"><span class="pre">Presence</span> <span class="pre">Manager</span></code> Service documentation!</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#presence-manager-requests">Presence Manager Requests</a></li>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#enter-chatroom">Enter chatroom</a></li>
+<li><a class="reference internal" href="#leave-chatroom">Leave chatroom</a></li>
+<li><a class="reference internal" href="#get-presence">Get Presence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error Handling</a></li>
+<li><a class="reference internal" href="#request-examples">Request Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">PresenceManager</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to <code class="docutils literal"><span class="pre">Presence</span> <span class="pre">Manager</span></code> Service documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-presence-manager-service-documentation">
+<h1>Welcome to <code class="docutils literal"><span class="pre">Presence</span> <span class="pre">Manager</span></code> Service documentation!<a class="headerlink" href="#welcome-to-presence-manager-service-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Presence</span> <span class="pre">Manager</span></code> service manage the presence of users in a xmpp chatroom. This service supports Openfire xmpp server. This service use <a class="reference external" href="https://github.com/fritzy/SleekXMPP">SleekXMPP</a> library as xmpp client.</p>
+<p>This document describes how to send data to the service and the returning response to the client.</p>
+<p>Communication between client and service is done through a message broker, Mosquitto, that implements the MQTT protocol versions 3.1 and 3.1.1. MQTT provides a lightweight method of carrying out messaging using a publish/subscribe model.
+Currently is in the <code class="docutils literal"><span class="pre">version</span> <span class="pre">1.0</span></code>.</p>
+</div>
+<div class="section" id="presence-manager-requests">
+<h2>Presence Manager Requests<a class="headerlink" href="#presence-manager-requests" title="Permalink to this headline">¶</a></h2>
+<p>To send requests to Presence Manager is necessary to subscribe the topic <code class="docutils literal"><span class="pre">/chatManager/requests.</span></code></p>
+<p>To receive the response of the requests made is necessary to subscribe the topic <code class="docutils literal"><span class="pre">/chatManager/response</span></code>.</p>
+<p>Every requests are made publishing a message in the broker in the topic <code class="docutils literal"><span class="pre">/chatManager/requests</span></code>.</p>
+<p>The request and response data have JSON formatting and contains a type to differentiate the requests.</p>
+<p>Every bad request is returned with a message indicating the wrong/missing fields and a explanatory message for each one.</p>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>There is only one main resource.</p>
+<div class="section" id="enter-chatroom">
+<h3>Enter chatroom<a class="headerlink" href="#enter-chatroom" title="Permalink to this headline">¶</a></h3>
+<p>The type of this request is <code class="docutils literal"><span class="pre">enterChatRoom</span></code>. This request allows listening the users’ presence in a specific chatroom.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">type</span></code>
+- The type of the request. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘type’: ‘enterChatRoom’, ‘message’: ‘successfuly’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="leave-chatroom">
+<h3>Leave chatroom<a class="headerlink" href="#leave-chatroom" title="Permalink to this headline">¶</a></h3>
+<p>The type of this request is <code class="docutils literal"><span class="pre">leaveChatRoom</span></code>. This request causes the service to stop listening for changes in the users’ presence in a specific chatroom.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">type</span></code>
+- The type of the request. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘type’: ‘leaveChatRoom’, ‘message’: ‘successfuly’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="get-presence">
+<h3>Get Presence<a class="headerlink" href="#get-presence" title="Permalink to this headline">¶</a></h3>
+<p>The type of this request is <code class="docutils literal"><span class="pre">getPresence</span></code>. This request allows to retrieve the users’ presence in a specific chatroom.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">This request only have one field and it is mandatory.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘type’: ‘getPresence’, ‘message’: presence_values}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<p>On all requests if an error occurs it is returned a json with the following format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">request</span> <span class="nb">type</span><span class="p">,</span>
+ <span class="s1">&#39;message&#39;</span>  <span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+ <span class="s1">&#39;error_type&#39;</span> <span class="p">:</span> <span class="n">error_hint</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">type</span></code> identifies the request that triggered the error, the <code class="docutils literal"><span class="pre">message</span></code> indicates that an error occurred and the <code class="docutils literal"><span class="pre">error_type</span></code> is a hint to understand the error.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">chatRoom</span></code> - Internal database error performing an chatroom query.</li>
+<li><code class="docutils literal"><span class="pre">chatPresence</span></code> - nternal database error performing an chatpresence query.</li>
+<li><code class="docutils literal"><span class="pre">createChatRoom</span></code> - Internal database error performing an chatroom insert.</li>
+<li><code class="docutils literal"><span class="pre">deleteChatroom</span></code> - Internal database error performing an chatroom delete.</li>
+</ul>
+</div>
+<div class="section" id="request-examples">
+<h2>Request Examples<a class="headerlink" href="#request-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here we provide examples for each request.</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">publish</span><span class="p">(</span><span class="s2">&quot;chatManager/requests&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;getPresence&#39;</span><span class="p">,</span> <span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;1111@conference.deti-es-04.ua.pt&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">publish</span><span class="p">(</span><span class="s2">&quot;chatManager/requests&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;leaveChatRoom&#39;</span><span class="p">,</span> <span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;1111@conference.deti-es-04.ua.pt&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">publish</span><span class="p">(</span><span class="s2">&quot;chatManager/requests&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;enterChatRoom&#39;</span><span class="p">,</span> <span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;1111@conference.deti-es-04.ua.pt&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, TeamUp.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

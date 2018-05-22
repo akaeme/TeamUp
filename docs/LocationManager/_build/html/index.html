@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Locations Manager Service’s documentation! &mdash; LocationsManager 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="LocationsManager 1.0.0 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> LocationsManager
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to <code class="docutils literal"><span class="pre">Locations</span> <span class="pre">Manager</span></code> Service’s documentation!</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#location-manager-requests">Location Manager Requests</a></li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+<li><a class="reference internal" href="#location-manager-authentication">Location Manager Authentication</a></li>
+<li><a class="reference internal" href="#location-manager-authorization">Location Manager Authorization</a></li>
+<li><a class="reference internal" href="#eventlocation-resource">EventLocation Resource</a><ul>
+<li><a class="reference internal" href="#delete-event-location">Delete Event Location</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#voting-resource">Voting Resource</a><ul>
+<li><a class="reference internal" href="#all-locations">All Locations</a></li>
+<li><a class="reference internal" href="#most-voted">Most Voted</a></li>
+<li><a class="reference internal" href="#three-most-voted">Three most voted</a></li>
+<li><a class="reference internal" href="#create-location">Create Location</a></li>
+<li><a class="reference internal" href="#vote">Vote</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-handling">Error Handling</a></li>
+<li><a class="reference internal" href="#request-examples">Request Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">LocationsManager</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to <code class="docutils literal"><span class="pre">Locations</span> <span class="pre">Manager</span></code> Service’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-locations-manager-service-s-documentation">
+<h1>Welcome to <code class="docutils literal"><span class="pre">Locations</span> <span class="pre">Manager</span></code> Service’s documentation!<a class="headerlink" href="#welcome-to-locations-manager-service-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Locations</span> <span class="pre">Manager</span></code> API is a service that manage locations in a wide range of situations.
+This document describes the protocol used to send data to the API and the returning response to the client.</p>
+<p>Communication is done over HTTP using POST and GET methods. Both request and response are formatted as JSON,
+and the content type of both is <code class="docutils literal"><span class="pre">application/json</span></code>.</p>
+<p>Currently is in the <code class="docutils literal"><span class="pre">version</span> <span class="pre">1.1</span></code>.</p>
+</div>
+<div class="section" id="location-manager-requests">
+<h2>Location Manager Requests<a class="headerlink" href="#location-manager-requests" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Locations</span> <span class="pre">Manager</span> <span class="pre">Requests</span></code> can assume multiple types according to the desired operation.
+Only <code class="docutils literal"><span class="pre">GET/POST/DELETE</span></code> http request methods are allowed.
+The request data is appended on the body for <code class="docutils literal"><span class="pre">POST</span></code> requests and on arguments for <code class="docutils literal"><span class="pre">GET</span></code>.
+The request and response body have JSON formatting.</p>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>The two main resources of this service are the <code class="docutils literal"><span class="pre">EventLocation</span></code> and the <code class="docutils literal"><span class="pre">Voting</span></code>. Both export methods according to its context,
+and there are a relation between <code class="docutils literal"><span class="pre">API</span></code> Resources and the <code class="docutils literal"><span class="pre">HTTP</span></code> Request methods. For instance, to get all the locations
+associated to a event, as the verb says,  it must be done a <code class="docutils literal"><span class="pre">HTTP</span></code> Request <code class="docutils literal"><span class="pre">get</span></code>, passing the user event_id.
+Every request must contain a valid <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>.
+Every bad request is returned with a message indicating the wrong/missing fields and a explanatory message for each one.</p>
+</div>
+<div class="section" id="location-manager-authentication">
+<h2>Location Manager Authentication<a class="headerlink" href="#location-manager-authentication" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Location</span> <span class="pre">Manager</span></code> service is authenticated over an external identify that must be trusted. The service need to be registered on the authentication central server and need to have the credentials. To be authenticated you need 2 steps/requests:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>POST</dt>
+<dd><ul class="first last">
+<li>Request: Send the username in order to mention the authentication intention.</li>
+<li>Response: Receive a nonce.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GET</dt>
+<dd><ul class="first last">
+<li>Request: Send the nonce digest concatenated with the password digest.</li>
+<li>Response: Receive a JSON Web Token (JWT).</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The digest function is <code class="docutils literal"><span class="pre">SHA256</span></code>.
+For the further requests this <code class="docutils literal"><span class="pre">JSON</span> <span class="pre">Web</span> <span class="pre">Token</span></code> will be used to confirm the service identity.</p>
+</div>
+<div class="section" id="location-manager-authorization">
+<h2>Location Manager Authorization<a class="headerlink" href="#location-manager-authorization" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Location</span> <span class="pre">Manager</span></code> service provides authorization using <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>. The authorization is completed in 3 steps: the first concerns the registration of a redirect url, to receive the grant, and the desired scopes. The second and the third are related to obtaining the grant and the OAuth 2.0 token respectively. The first and second step must contain an <code class="docutils literal"><span class="pre">JWT-Bearer</span></code> to provide authentication and check it over a centralized well trusted Authentication Service and only provide access to the service if the client is authenticated.</p>
+<p>The service export 2 interfaces to handle all the communications:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Authorization Managment</dt>
+<dd><p class="first">An interface that allows to create multiple apps on the service. To accomplish this the client must be authenticated and indicate one url to where the grant will be redirected and the desired scopes, to get different views from the service. The service will respond with a <cite>client id</cite> and a <cite>client secret</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">authorization_managment</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Request Body</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">redirect_uri</span></code>
+- The <code class="docutils literal"><span class="pre">url</span></code> where the grant will be redirected. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">scopes</span></code>
+- The <code class="docutils literal"><span class="pre">scope</span></code> is the desired permissions, considering that exists permissions that a client cant get. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">jwt-bearer</span></code>
+- The <code class="docutils literal"><span class="pre">jwt-bearer</span></code> is the token that contain information about the client and permit check if him is authenticated. Type <strong>str</strong>.</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Return app information:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="s1">&#39;client_secret&#39;</span><span class="p">:</span> <span class="s1">&#39;4321&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="last">Internally the service gets the client identification when confirm his authenticity by contacting the authentication server.
+A client can have multiple apps and multiple views over the service.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Authorize</dt>
+<dd><p class="first last">An interface that provides 2 methods: one <cite>GET</cite> and one <cite>POST</cite>. The <cite>GET</cite> objective is provide a way to get the grant token and then exchange the grant with a <cite>OAuth 2.0</cite> token by calling the <cite>POST</cite>. Those methods were implemented by the library that the service use: flask oauthlib available at <a class="reference external" href="https://github.com/lepture/flask-oauthlib">github</a>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="eventlocation-resource">
+<h2>EventLocation Resource<a class="headerlink" href="#eventlocation-resource" title="Permalink to this headline">¶</a></h2>
+<p>This resource provides a group of methods to handle all the operations related with locations, from the simplest to the
+most complex, using generic and <code class="docutils literal"><span class="pre">modular</span></code> methods.</p>
+<p>Resource Map:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---------------+---------------------------+</span>
+<span class="o">|</span> <span class="n">HTTP</span>  <span class="n">Methods</span> <span class="o">|</span>     <span class="n">API</span> <span class="n">Methods</span>           <span class="o">|</span>
+<span class="o">+---------------+---------------------------+</span>
+<span class="o">|</span>     <span class="n">POST</span>      <span class="o">|</span> <span class="o">*</span> <span class="n">create</span> <span class="n">Event</span> <span class="n">Location</span>   <span class="o">|</span>
+<span class="o">+---------------+---------------------------+</span>
+<span class="o">|</span>    <span class="n">DELETE</span>     <span class="o">|</span> <span class="o">*</span> <span class="n">delete</span> <span class="n">Event</span> <span class="n">Location</span>   <span class="o">|</span>
+<span class="o">+---------------+---------------------------+</span>
+</pre></div>
+</div>
+<p>This call allows to <code class="docutils literal"><span class="pre">create</span></code> all information associated to an event.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">Event_location</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- Get the ID of event received from the body.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">timestamp</span></code>
+- The epoch timestamp that defines the schedule of the event.</p>
+<dl class="last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="delete-event-location">
+<h3>Delete Event Location<a class="headerlink" href="#delete-event-location" title="Permalink to this headline">¶</a></h3>
+<p>This call allows to <code class="docutils literal"><span class="pre">delete</span></code> all information associated to an event.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">Event_location</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- Get the ID of event received from the body.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">timestamp</span></code>
+- The epoch timestamp tha defines the schedule of the event.</p>
+<dl class="last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="voting-resource">
+<h2>Voting Resource<a class="headerlink" href="#voting-resource" title="Permalink to this headline">¶</a></h2>
+<p>This resource provides only one method to handle all the operations related with events.</p>
+<p>Resource Map:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+------------------------------------------+</span>
+<span class="o">|</span> <span class="n">HTTP</span>  <span class="n">Methods</span> <span class="o">|</span>     <span class="n">API</span> <span class="n">Methods</span>          <span class="o">|</span>
+<span class="o">+---------------+--------------------------+</span>
+<span class="o">|</span>               <span class="o">|</span> <span class="o">*</span> <span class="n">get</span> <span class="nb">all</span> <span class="n">locations</span>      <span class="o">|</span>
+<span class="o">|</span>               <span class="o">|--------------------------|</span>
+<span class="o">|</span>      <span class="n">GET</span>      <span class="o">|</span> <span class="o">*</span> <span class="n">get</span> <span class="n">most</span> <span class="n">voted</span>         <span class="o">|</span>
+<span class="o">|</span>               <span class="o">|--------------------------|</span>
+<span class="o">|</span>               <span class="o">|</span> <span class="o">*</span> <span class="n">get</span> <span class="n">Three</span> <span class="n">most</span> <span class="n">voted</span>   <span class="o">|</span>
+<span class="o">+---------------+--------------------------+</span>
+<span class="o">|</span>     <span class="n">POST</span>      <span class="o">|</span> <span class="o">*</span> <span class="n">add</span> <span class="n">Location</span>           <span class="o">|</span>
+<span class="o">|</span>               <span class="o">|</span> <span class="o">*</span> <span class="n">add</span> <span class="n">Vote</span>               <span class="o">|</span>
+<span class="o">+---------------+--------------------------+</span>
+</pre></div>
+</div>
+<div class="section" id="all-locations">
+<h3>All Locations<a class="headerlink" href="#all-locations" title="Permalink to this headline">¶</a></h3>
+<p>This method allows to <code class="docutils literal"><span class="pre">get</span></code> all information (latitude, longitude, votes and city) about all locations of an event. The return result is sorted by the <code class="docutils literal"><span class="pre">priority</span></code> field:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">all_locations</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The id of an event, it is generated by the service.</p>
+<dl class="last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Returns a list of all locations associated to the event_id:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;locations&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">lat</span><span class="p">,</span><span class="n">long</span><span class="p">,</span><span class="n">votes</span><span class="p">,</span><span class="n">city</span><span class="p">)]}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="most-voted">
+<h3>Most Voted<a class="headerlink" href="#most-voted" title="Permalink to this headline">¶</a></h3>
+<p>This method allows to <code class="docutils literal"><span class="pre">get</span></code> the <code class="docutils literal"><span class="pre">most</span> <span class="pre">voted</span></code> location for an event:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">most_voted</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The id of an event, it is generated by the service.</p>
+<dl class="last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Returns the geographic coordinates and votes associated to the most voted location of an event:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;locations&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">lat</span><span class="p">,</span><span class="n">long</span><span class="p">,</span><span class="n">votes</span><span class="p">,</span><span class="n">city</span><span class="p">)]}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="three-most-voted">
+<h3>Three most voted<a class="headerlink" href="#three-most-voted" title="Permalink to this headline">¶</a></h3>
+<p>This method allows to <code class="docutils literal"><span class="pre">get</span></code> the <code class="docutils literal"><span class="pre">three</span> <span class="pre">most</span> <span class="pre">voted</span></code> location for an event by <code class="docutils literal"><span class="pre">city</span> <span class="pre">name</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">three_most_voted</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">zone</span></code>
+- The name of city of the location for an event.</p>
+<dl class="last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Returns a list of the three most voted locations associated to the event_id by zone:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;locations&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">lat</span><span class="p">,</span><span class="n">long</span><span class="p">,</span><span class="n">votes</span><span class="p">,</span><span class="n">city</span><span class="p">),(</span><span class="n">lat_1</span><span class="p">,</span><span class="n">long_1</span><span class="p">,</span><span class="n">votes_1</span><span class="p">,</span><span class="n">city_1</span><span class="p">),(</span><span class="n">lat_2</span><span class="p">,</span><span class="n">long_2</span><span class="p">,</span><span class="n">votes_2</span><span class="p">,</span><span class="n">city_2</span><span class="p">)]}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="create-location">
+<h3>Create Location<a class="headerlink" href="#create-location" title="Permalink to this headline">¶</a></h3>
+<p>This method allows to <code class="docutils literal"><span class="pre">create</span></code> the location associated to an event to begin the voting process.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">add_location</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><blockquote class="first">
+<div><p>The following fields are mandatory.</p>
+</div></blockquote>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The ID that references the event .</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">lat</span></code>
+-  The latitude of the location coordinates.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">long</span></code>
+- The longitude of the location coordinate.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">city</span></code>
+- The name of city of the location for an event.</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">priority</span></code></p>
+</div></blockquote>
+<ul class="simple">
+<li>The priority associated with location introduce on request body.</li>
+</ul>
+<dl class="last docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Returns an ack when the creation process succeeds:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="sa">u</span><span class="s1">&#39;ack&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;true&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="vote">
+<h3>Vote<a class="headerlink" href="#vote" title="Permalink to this headline">¶</a></h3>
+<p>This method allows to <code class="docutils literal"><span class="pre">create</span></code> a vote in a particular location for an event, this is the voting process.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">vote</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The ID that references the event .</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">lat</span></code>
+- The latitude of the location coordinates.</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">long</span></code></p>
+</div></blockquote>
+<ul class="simple">
+<li>The longitude of the location coordinate.</li>
+</ul>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code></dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Returns an ack when the creation process succeeds:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="sa">u</span><span class="s1">&#39;ack&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;true&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<p>On all requests if an error occurs it is returned a json with the following format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">errorType</span><span class="p">,</span>
+ <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+ <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">HTTP</span> <span class="n">code</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">errorType</span></code>  refers to the entity/method that triggered the error and the <code class="docutils literal"><span class="pre">message</span></code> is a hint to understand the error.:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">AddLocation</span></code> - Internal database error performing an location insert.</li>
+<li><code class="docutils literal"><span class="pre">AddEvent</span></code> - Internal database error performing an event_location insert.</li>
+<li><code class="docutils literal"><span class="pre">DeleteEvent</span></code> - Internal database error performing an location delete by event ID.</li>
+<li><code class="docutils literal"><span class="pre">Vote</span></code> - Internal database error performing an voting insert.</li>
+</ul>
+<p>Most common errors:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---------------+------------------------+</span>
+<span class="o">|</span> <span class="n">HTTP</span>  <span class="n">Code</span>    <span class="o">|</span>      <span class="n">Description</span>       <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">400</span>       <span class="o">|</span>  <span class="n">Bad</span> <span class="n">Request</span>           <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">403</span>       <span class="o">|</span>  <span class="n">Forbidden</span>             <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">405</span>       <span class="o">|</span>  <span class="n">Method</span> <span class="n">Not</span> <span class="n">Allowed</span>    <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">500</span>       <span class="o">|</span>  <span class="n">Internal</span> <span class="n">Server</span> <span class="n">Error</span> <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+</pre></div>
+</div>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not provided: {“message”: “The browser (or proxy) sent a request that this server could not understand.”}</p>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not valid, meaning that you aren’t authorized: {‘message’: “You don’t have the permission to access the requested resource. It is either read-protected or not readable by the server.”}</p>
+</div>
+<div class="section" id="request-examples">
+<h2>Request Examples<a class="headerlink" href="#request-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here we provide examples to each method, using <a class="reference external" href="http://docs.python-requests.org/en/master/">Requests</a> and
+<a class="reference external" href="https://curl.haxx.se/">cURL</a>.</p>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">EventLocation</span> <span class="pre">Resource</span></code></dt>
+<dd><ul class="first simple">
+<li><code class="docutils literal"><span class="pre">POST</span></code></li>
+</ul>
+<dl class="docutils">
+<dt>EventLocation::</dt>
+<dd><p class="first last">requests.post(‘<a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/Event_location">http://127.0.0.1:5005/locationManager/v1.1/Event_location</a>’, json={‘event_id’: 3, ‘timestamp’:‘1511046742’,’access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">event_id</span><span class="s1">&#39;: 3, &#39;</span><span class="n">timestamp</span><span class="s1">&#39;:&#39;</span><span class="mi">1511046742</span><span class="s1">&#39;,&#39;</span><span class="n">access_token</span><span class="s1">&#39;: &#39;</span><span class="n">helloworld</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">Event_location</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">DELETE</span></code></li>
+</ul>
+<dl class="docutils">
+<dt>EventLocation::</dt>
+<dd><p class="first last">requests.delete(‘<a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/Event_location/">http://127.0.0.1:5005/locationManager/v1.1/Event_location/</a>’, params={‘user_id’: 3, ‘access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">DELETE</span> <span class="o">-</span><span class="n">G</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">Event_location</span><span class="o">/</span> <span class="o">-</span><span class="n">d</span> <span class="n">user_id</span><span class="o">=</span><span class="mi">3</span> <span class="o">-</span><span class="n">d</span> <span class="n">access_token</span><span class="o">=</span><span class="n">helloworld</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">Voting</span> <span class="pre">Resource</span></code></dt>
+<dd><ul class="first simple">
+<li><code class="docutils literal"><span class="pre">GET</span></code></li>
+</ul>
+<dl class="docutils">
+<dt>All Locations::</dt>
+<dd><p class="first last">requests.get(‘<a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/all_locations">http://127.0.0.1:5005/locationManager/v1.1/voting/all_locations</a>’, params={‘event_id’: 3, ‘access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">GET</span> <span class="o">-</span><span class="n">G</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">all_locations</span> <span class="o">-</span><span class="n">d</span> <span class="n">event_id</span><span class="o">=</span> <span class="mi">3</span> <span class="o">-</span><span class="n">d</span> <span class="n">access_token</span><span class="o">=</span><span class="n">helloworld</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Most Voted::</dt>
+<dd><p class="first last">requests.get(‘<a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/most_voted">http://127.0.0.1:5005/locationManager/v1.1/voting/most_voted</a>’, params={‘event_id’: 3, ‘access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">GET</span> <span class="o">-</span><span class="n">G</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">most_voted</span> <span class="o">-</span><span class="n">d</span> <span class="n">event_id</span><span class="o">=</span><span class="mi">3</span> <span class="o">-</span><span class="n">d</span> <span class="n">access_token</span><span class="o">=</span><span class="n">helloworld</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Three most voted::</dt>
+<dd><p class="first last">requests.get(‘<a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted">http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted</a>’, params={‘zone’: ‘Aveiro’, ‘access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">GET</span> <span class="o">-</span><span class="n">G</span> <span class="n">http</span><span class="p">:</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">three_most_voted</span> <span class="o">-</span><span class="n">d</span> <span class="n">zone</span><span class="o">=</span><span class="n">Aveiro</span> <span class="o">-</span><span class="n">d</span> <span class="n">access_token</span><span class="o">=</span><span class="n">helloworld</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">POST</span></code></li>
+</ul>
+<dl class="docutils">
+<dt>Add Location:</dt>
+<dd><p class="first last">requests.post(‘<a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/add_location">http://127.0.0.1:5005/locationManager/v1.1/voting/add_location</a>’, json={‘event_id’: 3, ‘lat’: ‘40,6303’,’long’: ‘-7,6575’,
+‘city’: ‘Aveiro’,’priority’: 2,’access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">event_id</span><span class="s1">&#39;: 3, &#39;</span><span class="n">lat</span><span class="s1">&#39;:&#39;</span><span class="mi">40</span><span class="p">,</span><span class="mi">6303</span><span class="s1">&#39;, &#39;</span><span class="n">long</span><span class="s1">&#39;: -7,657, &#39;</span><span class="n">city</span><span class="s1">&#39;: Aveiro, &#39;</span><span class="n">priority</span><span class="s1">&#39;: 2 ,&#39;</span><span class="n">access_token</span><span class="s1">&#39;: &#39;</span><span class="n">helloworld</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">add_location</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Add Vote:</dt>
+<dd><p class="first last">requests.post(‘<a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/vote">http://127.0.0.1:5005/locationManager/v1.1/voting/vote</a>’, json={‘event_id’: 3, ‘lat’: ‘40,6303’,’long’: ‘-7,6575’,
+‘access_token’: ‘helloworld’})</p>
+</dd>
+</dl>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">event_id</span><span class="s1">&#39;: 3, &#39;</span><span class="n">lat</span><span class="s1">&#39;:&#39;</span><span class="mi">40</span><span class="p">,</span><span class="mi">6303</span><span class="s1">&#39;, &#39;</span><span class="n">long</span><span class="s1">&#39;: -7,657,&#39;</span><span class="n">access_token</span><span class="s1">&#39;: &#39;</span><span class="n">helloworld</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span><span class="n">locationManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">voting</span><span class="o">/</span><span class="n">vote</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Team Up.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

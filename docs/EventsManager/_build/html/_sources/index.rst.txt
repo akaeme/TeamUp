@@ -1,0 +1,558 @@
+Welcome to ``Events Manager`` Service's documentation!
+======================================================
+
+Overview
+--------
+``Events Manager`` service is a RestFul API that manage events in a wide range of situations.
+This document describes the protocol used to send data to the API and the returning response to the client.
+
+Communication is done over HTTP using its methods. The response is formatted as JSON,
+and the content type of both is ``application/json``.
+
+Currently is in the ``version 1.1``.
+
+Events Manager Requests
+-----------------------
+Events requests can assume multiple types according to the desired operation.
+Only ``GET/POST/DELETE`` HTTP request methods are allowed.
+The request data is appended on the body for ``POST`` requests and on arguments for ``DELETE`` and ``GET``. The response body have JSON formatting such as post requests.
+Every request must contain a valid ``OAuth 2.0``.
+Every bad request is returned with a message indicating the wrong/missing fields and a explanatory message for each one.
+
+EventsManager Authentication
+----------------------------
+``Events Manager`` service is authenticated over an external identify that must be trusted. The service need to be registered on the authentication central server and need to have the credentials. To be authenticated you need 2 steps/requests:
+
+- POST
+    - Request: Send the username in order to mention the authentication intention
+    - Response: Receive a nonce 
+
+- GET
+    - Request: Send the nonce digest concatenated with the password digest
+    - Response: Receive a JSON Web Token(JWT)
+
+The digest function is ``SHA256``.
+For the further requests this ``JSON Web Token`` will be used to confirm the service identity.
+
+Events Manager Authorization
+----------------------------
+``Events Manager`` service provides authorization using ``OAuth 2.0``. The authorization is completed in 3 steps: the first concerns the registration of a redirect url, to receive the grant, and the desired scopes. The second and the third are related to obtaining the grant and the OAuth 2.0 token respectively. The first and second step must contain an ``JWT-Bearer`` to provide authentication and check it over a centralized well trusted Authentication Service and only provide access to the service if the client is authenticated.
+
+The service export 2 interfaces to handle all the communications:
+
+    - Authorization Managment
+        An interface that allows to create multiple apps on the service. To accomplish this the client must be authenticated and indicate one url to where the grant will be redirected and the desired scopes, to get different views from the service. The service will respond with a `client id` and a `client secret`::
+
+            http://127.0.0.1:5002/eventsManager/v1.1/authorization_managment/
+
+        - Request Body
+
+            :class:`redirect_uri`
+            - The ``url`` where the grant will be redirected. Type **str**.
+
+            :class:`scopes`
+            - The ``scope`` is the desired permissions, considering that exists permissions that a client cant get. Type **str**.
+
+            :class:`jwt-bearer`
+            - The ``jwt-bearer`` is the token that contain information about the client and permit check if him is authenticated. Type **str**.
+
+        - Response Body
+            Return app information::
+
+            {'client_id': '1234','client_secret': '4321'}
+
+        Internally the service gets the client identification when confirm his authenticity by contacting the authentication server.
+        A client can have multiple apps and multiple views over the service. 
+    - Authorize
+        An interface that provides 2 methods: one `GET` and one `POST`. The `GET` objective is provide a way to get the grant token and then exchange the grant with a `OAuth 2.0` token by calling the `POST`. Those methods were implemented by the library that the service use: flask oauthlib available at `github`_.
+        
+        .. _github: https://github.com/lepture/flask-oauthlib
+
+Resources
+---------
+The two main resources of this service are the Event and the User. Both export methods according to its context and there are a relation between API Resources and the HTTP Request methods. For instance, to get all the events
+which an user is participant, as the verb says,  it must be done a HTTP Request get, passing the user id.
+
+Event Resource
+--------------
+This resource provides a group of methods to handle all the operations related with events, from the simplest to the
+most complex, using generic and ``modular`` methods.
+
+Resource Map::
+
+    +------------------+---------------------------+
+    | HTTP  Methods    |     API Methods           |
+    +------------------+---------------------------+
+    |     GET          | * get Public Events       |
+    |                  | * get Participants        |
+    |                  | * get Public by Activity  |
+    |                  | * get Event Name          |
+    |                  | * get Event Information   |
+    +------------------+---------------------------+
+    |     POST         | * create Event            |
+    |                  | * update Event            |
+    +------------------+---------------------------+
+    |    DELETE        | * delete Event            |
+    +------------------+---------------------------+
+
+=============
+Public Events
+=============
+This call allows to get all the ``public`` events::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/events/
+
+- Request Body
+    The following fields are mandatory.
+
+    :class:`op_type`
+    - The ``operation type`` is the operation keyword that indicates the operation that should be done by the service. It must be `publicEvents`. Type **str**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns a list of events::
+
+    {'ack': 'true', 'events': [events] }
+
+============
+Participants
+============
+This call allows to get ``all users`` associated to a specific event::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/events/
+
+- Request Body
+    The following fields are mandatory.
+
+    :class:`op_type`
+    - The ``operation type`` is the operation keyword that indicates the operation that should be done by the service. It must be `participants`. Type **str**.
+
+    :class:`event_id`
+    - The id of an event. Type **int**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns a list of users::
+
+    {'ack': 'true', 'users': [users]}
+
+=========================
+Public Events By Activity
+=========================
+This call allows to get all the ``public events id`` associated to a activity::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/events/
+
+- Request Body
+    The following fields are mandatory.
+
+    :class:`op_type`
+    - The ``operation type`` is the operation keyword that indicates the operation that should be done by the service. It must be `publicByActivity`. Type **str**.
+
+    :class:`activity`
+    - The ``activity`` to filter the events. Type **str**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns a list of events::
+
+    {'ack': 'true', 'events': [events]}
+
+==========
+Event Name
+==========
+This call allows to get the ``event name`` associated to an event id::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/events/
+
+- Request Body
+    The following fields are mandatory.
+
+    :class:`op_type`
+    - The ``operation type`` is the operation keyword that indicates the operation that should be done by the service. It must be `eventName`. Type **str**.
+
+    :class:`event_id`
+    -- The id of an event. Type **int**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns the event name::
+
+    {'ack': 'true', 'eventName': 'eventName'}
+
+=================
+Event Information
+=================
+This call allows to get the ``event information`` associated to an event id::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/events/
+
+- Request Body
+    The following fields are mandatory.
+
+    :class:`op_type`
+    - The ``operation type`` is the operation keyword that indicates the operation that should be done by the service. It must be `event_info`. Type **str**.
+
+    :class:`event_id`
+    -- The id of an event. Type **int**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns the associated information of an event::
+
+    {'ack': 'true', 'info': [info]}
+
+============
+Create Event
+============
+This method allows to ``create`` an event::
+
+     http://127.0.0.1:5002/eventsManager/v1.1/events/create
+
+- Request Body
+    The following fields are allowed and some of them are optional.
+
+    :class:`name`
+    - The event name. Type **str**.
+
+    :class:`type`
+    - (Optional) The event type, can be 0 to public or 1 to private. The default is 0. Type **int**.
+
+    :class:`activity`
+    - The activity that the event is related to. Type **str**.
+
+    :class:`maxppl`
+    - The maximum number of people that the event allow. Type **int**.
+
+    :class:`minppl`
+    - (Optional) The minimum number of people that the event allow. The default is 0. Type **int**.
+
+    :class:`owner`
+    - The event owner. It has all the permissions over its event. Type **str**.
+
+    :class:`description`
+    - (Optional) The event description, it have a maximum of 140 characters. Type **str**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+    Example::
+
+        {'name': 'eventName',
+        'type': 1,
+        'activity':'eventActivity',
+        'maxppl': 15,
+        'minppl': 5,
+        'owner': ownerID,
+        'description': 'eventDescription'}
+
+- Response Body
+    It contains the id of the event created::
+
+    {'ack': 'true', 'events_id': 'events_id'}
+
+============
+Update Event
+============
+This method allows to ``update`` an event previously created. Only the owner can perform this action::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/events/update
+
+- Request Body
+    The following fields are allowed and some of them are optional.
+
+    :class:`event_id`
+    - The id of an event, it is generated by the service. Type **int**.
+
+    :class:`name`
+    - (Optional) The event name. Type **str**.
+
+    :class:`type`
+    - (Optional) The event type, can be 0 to public or 1 to private. The default is 0. Type **int**.
+
+    :class:`activity`
+    - (Optional) The activity that the event is related to. Type **str**.
+
+    :class:`maxppl`
+    - (Optional) The maximum number of people that the event allow. Type **int**.
+
+    :class:`minppl`
+    - (Optional) The minimum number of people that the event allow. The default is 0. Type **int**.
+
+    :class:`description`
+    - (Optional) The event description, it have a maximum of 140 characters. Type **str**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns an ack::
+
+    {'ack': 'true'}
+
+============
+Delete Event
+============
+This method allows the owner to ``delete`` one of his events::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/events/
+
+- Request Body
+    The following fields are mandatory.
+
+    :class:`event_id`
+    - The id of an event, it is generated by the service. Type **int**.
+
+    :class:`user_id`
+    - The id of an user, it must be the owner id. Type **str**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns an ack::
+
+    {'ack': 'true'}
+
+User Resource
+-------------
+This resource provides a group of methods to handle all the operations related with events, ``users`` and its actions as
+active part of the events.
+
+Resource Map::
+
+    +-------------------------------------+
+    | HTTP  Methods |     API Methods     |
+    +---------------+---------------------+
+    |     GET       | * get Events        |
+    +---------------+---------------------+
+    |     POST      | * add User          |
+    +---------------+---------------------+
+    |    DELETE     | * delete User       |
+    +---------------+---------------------+
+
+==========
+Get Events
+==========
+This call allows to ``get`` all the events which an user is associated to::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/users/
+
+- Request Body
+    The following fields are mandatory.
+
+    :class:`user_id`
+    - The id of an user. Type **str**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns a list of events::
+
+    {'ack': 'true', 'events': {'private': {event_id: [name, activity]}, 'public': [{event_id: [name, activity]}}}
+
+========
+Add User
+========
+This method allows to ``associate`` an user to specific event::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/users/
+
+- Request Body
+    The following fields are mandatory.
+
+    :class:`event_id`
+    - The id of an event, it is generated by the service. Type **int**.
+
+    :class:`user_id`
+    - The id of an user. Type **str**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns an ack::
+
+    {'ack': 'true'}
+
+===========
+Remove User
+===========
+This method allows to ``disassociate`` an user to an event::
+
+    http://127.0.0.1:5002/eventsManager/v1.1/users/
+
+- Request Body
+    Both fields are mandatory.
+
+    :class:`event_id`
+    - The id of an event, it is generated by the service. Type **int**.
+
+    :class:`user_id`
+    - The id of an user which will be disassociated to an event. Type **str**.
+
+    :class:`access_token`
+    - The ``access token`` that contains a set of permissions and that was provided by this service. Type **str**.
+
+- Response Body
+    Returns an ack::
+
+    {'ack': 'true'}
+
+Error Handling
+--------------
+On all requests if an error occurs it is returned a json with the following format::
+
+    {'error': error type,
+     'msg'  : message,
+     'code' : HTTP code}
+
+The ``error type`` refers to the entity/method that triggered the error and the ``message`` is a hint to understand
+the error.
+
+- ``Events`` - Internal database error performing an user query.
+
+- ``AddUser`` - Internal database error performing an user insert.
+
+- ``RemoveUser`` - Internal database error performing an user delete.
+
+- ``PublicEvents`` - Internal database error performing an event query.
+
+- ``Participants`` - Internal database error performing an user query.
+
+- ``CreateEvent`` - Internal database error performing an event insert.
+
+- ``UpdateEvent`` - Internal database error performing an user update. Missing permission to perform this operation. Event does not exist.
+
+- ``DeleteEvent`` - Internal database error performing an user delete. Missing permission to perform this operation. Event does not exist.
+
+Most common errors::
+
+    +---------------+------------------------+
+    | HTTP  Code    |      Description       |
+    +---------------+------------------------+
+    |     400       |  Bad Request           |
+    +---------------+------------------------+
+    |     403       |  Forbidden             |
+    +---------------+------------------------+
+    |     405       |  Method Not Allowed    |
+    +---------------+------------------------+
+    |     500       |  Internal Server Error |
+    +---------------+------------------------+
+
+The following message is returned when the ``OAuth 2.0`` is not provided: {"message": "The browser (or proxy) sent a request that this server could not understand."}
+
+The following message is returned when the ``OAuth 2.0`` is not valid, meaning that you aren't authorized: {'message': "You don't have the permission to access the requested resource. It is either read-protected or not readable by the server."}
+
+Request Examples
+----------------
+Here we provide examples to each method, using `Requests <http://docs.python-requests.org/en/master/>`_ and
+`cURL <https://curl.haxx.se/>`_.
+
+- ``Events Resource``
+    - ``GET``
+        `Public Events`::
+
+            requests.get('http://127.0.0.1:5002/eventsManager/v1.1/events/', params={'op_type': 'publicEvents', 'access_token': 'helloworld'})
+
+        ::
+
+            curl -X GET -G http://127.0.0.1:5002/eventsManager/v1.1/events/ -d op_type=publicEvents -d access_token=helloworld
+
+        `Participants`::
+
+            requests.get('http://127.0.0.1:5002/eventsManager/v1.1/events/', params={'op_type': 'participants', 'event_id': 2, 'access_token': 'helloworld'})
+
+        ::
+
+            curl -X GET -G http://127.0.0.1:5002/eventsManager/v1.1/events/ -d op_type=participants -d event_id=3 -d access_token=helloworld
+
+        `Public Events by Activity`::
+
+            requests.get('http://127.0.0.1:5002/eventsManager/v1.1/events/', params={'op_type': 'publicByActivity', 'activity': 'basket', 'access_token': 'helloworld'})
+
+        ::
+
+            curl -X GET -G http://127.0.0.1:5002/eventsManager/v1.1/events/ -d op_type=publicByActivity -d activity=basket -d access_token=helloworld
+
+        `Event Name`::
+
+            requests.get('http://127.0.0.1:5002/eventsManager/v1.1/events/', params={'op_type': 'eventName', 'event_id': 2, 'access_token': 'helloworld'})
+
+        ::
+
+            curl -X GET -G http://127.0.0.1:5002/eventsManager/v1.1/events/ -d op_type=eventName -d event_id=3 -d access_token=helloworld
+
+        `Event Information`::
+
+            requests.get('http://127.0.0.1:5002/eventsManager/v1.1/events/', params={'op_type': 'event_info', 'event_id': 2, 'access_token': 'helloworld'})
+
+        ::
+
+            curl -X GET -G http://127.0.0.1:5002/eventsManager/v1.1/events/ -d op_type=event_info -d event_id=3 -d access_token=helloworld
+
+    - ``POST``
+        `Create Event`::
+
+            requests.post('http://127.0.0.1:5002/eventsManager/v1.1/events/create', json={'name': 'eventName', 'type': 0, 'activity': 'football', 'maxppl': 20, 'minppl': 10, 'owner': 1234, 'description': 'event description', 'access_token': 'helloworl'})
+
+        ::
+
+            curl -H "Content-Type: application/json" -X POST -d '{"name": "eventName", "type": 0, "activity": "football", "maxppl": 20, "minppl": 10, "owner": 1234, "description": "event description", "access_token": "helloworl"}' http://127.0.0.1:5002/eventsManager/v1.1/events/create
+
+        `Update Event`::
+
+            requests.post('http://127.0.0.1:5002/eventsManager/v1.1/events/update', json={'user_id': 1234, 'event_id': 2, 'name': 'eventNewName', 'type': 0, 'activity': 'basket', 'maxppl': 20, 'minppl': 10, 'description': 'event update', 'access_token': 'helloworld'})
+
+        ::
+
+            curl -H "Content-Type: application/json" -X POST -d '{"user_id": 1234, "event_id": 3, "name": "eventNewName", "type": 0, "activity": "basket", "maxppl": 20, "minppl": 10, "description": "event update", "access_token": "helloworld"}' http://127.0.0.1:5002/eventsManager/v1.1/events/update
+
+
+    - ``DELETE``
+        `Delete Event`::
+
+            requests.delete('http://127.0.0.1:5002/eventsManager/v1.1/events/', params={'event_id': 2, 'user_id': 1234, 'access_token': 'helloworld'})
+
+        ::
+
+            curl -X DELETE -G http://127.0.0.1:5002/eventsManager/v1.1/events/ -d event_id=3 -d user_id=1234 -d access_token=helloworld
+
+- ``Users Resource``
+    - ``GET``
+        `Get User's Events`::
+
+            requests.get('http://127.0.0.1:5002/eventsManager/v1.1/users/', params={'user_id': 1234, 'access_token': 'helloworld'})
+
+        ::
+
+            curl -X GET -G http://127.0.0.1:5002/eventsManager/v1.1/users/ -d user_id=1234 -d access_token=helloworld
+
+    - ``POST``
+        `Add User to Event`::
+
+            requests.post('http://127.0.0.1:5002/eventsManager/v1.1/users/', json={'event_id': 2, 'user_id': 9876, 'access_token': 'helloworld'})
+
+        ::
+
+            curl -H "Content-Type: application/json" -X POST -d '{"user_id": 9876, "event_id": 3, "access_token": "helloworld"}' http://127.0.0.1:5002/eventsManager/v1.1/users/
+
+    - ``DELETE``
+        `Delete User from Event`::
+
+            requests.delete('http://127.0.0.1:5002/eventsManager/v1.1/users/', params={'event_id': 2, 'user_id': 9876, 'access_token': 'helloworld'})
+
+        ::
+
+            curl -X DELETE -G http://127.0.0.1:5002/eventsManager/v1.1/users/ -d event_id=3 -d user_id=9876 -d access_token=helloworld

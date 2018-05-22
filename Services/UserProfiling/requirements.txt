@@ -1,0 +1,8 @@
+requests==2.18.1
+Flask_SQLAlchemy==1.0
+Flask==0.10.1
+Flask_RESTful==0.3.6
+cryptography==1.9
+PyMySQL==0.8.0
+coloredlogs==7.3
+Flask_OAuthlib==0.9.4

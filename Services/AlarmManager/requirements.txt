@@ -1,0 +1,10 @@
+PyMySQL==0.7.11
+coloredlogs==7.3
+requests==2.18.4
+Flask==0.12.2
+Flask_RESTful==0.3.6
+apscheduler==3.4.0
+cryptography==2.1.4
+flask_apscheduler==1.7.1
+flask_oauthlib==0.9.4
+flask_sqlalchemy==2.3.2

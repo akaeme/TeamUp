@@ -1,0 +1,8 @@
+coloredlogs==7.3
+requests==2.18.4
+Flask==0.12.2
+Flask_RESTful==0.3.6
+cryptography==2.1.4
+flask_oauthlib==0.9.4
+flask_sqlalchemy==2.3.2
+plivo==4.0b1

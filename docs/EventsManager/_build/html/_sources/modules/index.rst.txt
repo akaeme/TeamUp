@@ -1,0 +1,14 @@
+The Events Manager Service API
+-------------
+
+Wide Vision
+-----
+
+method, this part of the documentation is for you.
+
+For more information, please read the `Python API specification
+<https://www.pornhub.com>`_.
+
+.. toctree::
+  :maxdepth: 2
+

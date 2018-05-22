@@ -1,0 +1,527 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Welcome to Chat Manager Service documentation! &#8212; ChatManager 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-chat-manager-service-documentation">
+<h1>Welcome to <code class="docutils literal"><span class="pre">Chat</span> <span class="pre">Manager</span></code> Service documentation!<a class="headerlink" href="#welcome-to-chat-manager-service-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Chat</span> <span class="pre">Manager</span></code> service is a RestFul API that manage xmpp chatrooms using Openfire xmpp server. This service use <a class="reference external" href="https://github.com/fritzy/SleekXMPP">SleekXMPP</a> library as xmpp client.</p>
+<p>This document describes the protocol used to send data to the API and the returning response to the client.</p>
+<p>Communication is done over HTTP using its methods. The response is formatted as JSON,
+and the content type of both is <code class="docutils literal"><span class="pre">application/json</span></code>.</p>
+<p>Currently is in the <code class="docutils literal"><span class="pre">version</span> <span class="pre">1.0</span></code>.</p>
+</div>
+<div class="section" id="chat-manager-requests">
+<h2>Chat Manager Requests<a class="headerlink" href="#chat-manager-requests" title="Permalink to this headline">¶</a></h2>
+<p>Chat Manager requests can only assume one type.
+The request body must have JSON formatting.
+The request data is appended on the body for <code class="docutils literal"><span class="pre">POST</span></code> requests. The response body have JSON formatting.
+Only <code class="docutils literal"><span class="pre">POST</span></code> http request methods are allowed.
+Every request must contain a valid <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>.
+Every bad request is returned with a message indicating the wrong/missing fields and a explanatory message for each one.</p>
+</div>
+<div class="section" id="chat-manager-authentication">
+<h2>Chat Manager Authentication<a class="headerlink" href="#chat-manager-authentication" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Chat</span> <span class="pre">Manager</span></code> service is authenticated over an external identify that must be trusted. The service need to be registered on the authentication central server and need to have the credentials. To be authenticated you need 2 steps/requests:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>POST</dt>
+<dd><ul class="first last">
+<li>Request: Send the username in order to mention the authentication intention</li>
+<li>Responce: Receive a nonce</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GET</dt>
+<dd><ul class="first last">
+<li>Request: Send the nonce digest concatenated with the password digest</li>
+<li>Response: Receive a JSON Web Token(JWT)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The digest function is <code class="docutils literal"><span class="pre">SHA256</span></code>.
+For the further requests this <code class="docutils literal"><span class="pre">JSON</span> <span class="pre">Web</span> <span class="pre">Token</span></code> will be used to confirm the service identity.</p>
+</div>
+<div class="section" id="chat-manager-authorization">
+<h2>Chat Manager Authorization<a class="headerlink" href="#chat-manager-authorization" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Chat</span> <span class="pre">Manager</span></code> service provides authorization using <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code>. The authorization is completed in 3 steps: the first concerns the registration of a redirect url, to receive the grant, and the desired scopes. The second and the third are related to obtaining the grant and the OAuth 2.0 token respectively. The first and second step must contain an <code class="docutils literal"><span class="pre">JWT-Bearer</span></code> to provide authentication and check it over a centralized well trusted Authentication Service and only provide access to the service if the client is autenticated.</p>
+<p>The service export 2 interfaces to handle all the communications:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Authorization Managment</dt>
+<dd><p class="first">An interface that allows to create multiple apps on the service. To accomplish this the client must be authenticated and indicate one url to where the grant will be redirected and the desired scopes, to get different views from the service. The service will respond with a <cite>client id</cite> and a <cite>client secret</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5002</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">authorization_managment</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Request Body</p>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">redirect_uri</span></code>
+- The <code class="docutils literal"><span class="pre">url</span></code> where the grant will be redirected. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">scopes</span></code>
+- The <code class="docutils literal"><span class="pre">scope</span></code> is the desired permissions, considering that exists permissions that a client cant get. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">jwt-bearer</span></code>
+- The <code class="docutils literal"><span class="pre">jwt-bearer</span></code> is the token that contain information about the client and permit check if him is authenticated. Type <strong>str</strong>.</p>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first">Return app information:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="s1">&#39;client_secret&#39;</span><span class="p">:</span> <span class="s1">&#39;4321&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="last">Internally the service gets the client identification when confirm his authenticity by contacting the authentication server.
+A client can have multiple apps and multiple views over the service.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Authorize</dt>
+<dd><p class="first last">An interface that provides 2 methods: one <cite>GET</cite> and one <cite>POST</cite>. The <cite>GET</cite> objective is provide a way to get the grant token and then exchange the grant with a <cite>OAuth 2.0</cite> token by calling the <cite>POST</cite>. Those methods were implemented by the library that the service use: flash oauthlib available at <a class="reference external" href="https://github.com/lepture/flask-oauthlib">github</a>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>There is only one main resource, that only allows <code class="docutils literal"><span class="pre">POST</span></code> and <code class="docutils literal"><span class="pre">DELETE</span></code> requests.</p>
+<div class="section" id="post-requests">
+<h3>POST requests<a class="headerlink" href="#post-requests" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="create-and-configure-a-chatroom">
+<h3>Create and configure a chatroom<a class="headerlink" href="#create-and-configure-a-chatroom" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows to create and configure a chatroom:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">createAndConfigureChatRoom</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">room_name</span></code>
+- The chatroom name. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">room_desc</span></code>
+- The chatroom description. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">logging</span></code>
+- Enable public logging. Can be <code class="docutils literal"><span class="pre">0</span></code> (enable) or <code class="docutils literal"><span class="pre">1</span></code> (disable). Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">invite</span></code>
+- Allow occupants to invite others. Can be <code class="docutils literal"><span class="pre">0</span></code> (enable) or <code class="docutils literal"><span class="pre">1</span></code> (disable). Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">allow_pm</span></code>
+- Who can send private messages. Can be <code class="docutils literal"><span class="pre">anyone</span></code> (allows anyone), <code class="docutils literal"><span class="pre">participants</span></code> (allows only participants), <code class="docutils literal"><span class="pre">moderators</span></code> (allows only moderators) and <code class="docutils literal"><span class="pre">none</span></code>
+(allows nobody).
+Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">max_users</span></code>
+- Maximum number of occupants. Can be <code class="docutils literal"><span class="pre">10</span></code>, <code class="docutils literal"><span class="pre">20</span></code>, <code class="docutils literal"><span class="pre">30</span></code>, <code class="docutils literal"><span class="pre">50</span></code>, <code class="docutils literal"><span class="pre">100</span></code> or <code class="docutils literal"><span class="pre">none</span></code>. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">public_room</span></code>
+- Make chatroom public. Can be <code class="docutils literal"><span class="pre">0</span></code> (enable) or <code class="docutils literal"><span class="pre">1</span></code> (disable). Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">persistent_room</span></code>
+- Make chatroom persistent. Can be <code class="docutils literal"><span class="pre">0</span></code> (enable) or <code class="docutils literal"><span class="pre">1</span></code> (disable). Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">moderated_room</span></code>
+- Make chatroom moderated. Can be <code class="docutils literal"><span class="pre">0</span></code> (enable) or <code class="docutils literal"><span class="pre">1</span></code> (disable). Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">members_only</span></code>
+- Make chatroom members_only. Can be <code class="docutils literal"><span class="pre">0</span></code> (enable) or <code class="docutils literal"><span class="pre">1</span></code> (disable). Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">disc_JID</span></code>
+- Who may discover real JIDs. Can be <code class="docutils literal"><span class="pre">moderators</span></code> (only moderators) and <code class="docutils literal"><span class="pre">anyone</span></code> (nobody). Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="leave-a-chatroom">
+<h3>Leave a chatroom<a class="headerlink" href="#leave-a-chatroom" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows to remove a user from a chatroom:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">leaveChatRoom</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">nick</span></code>
+- The user’s nick. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="send-message-chatroom">
+<h3>Send message chatroom<a class="headerlink" href="#send-message-chatroom" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows to send a message to a chatroom:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">sendMessage</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">message</span></code>
+- The content of a message. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="send-invite-chatroom">
+<h3>Send invite chatroom<a class="headerlink" href="#send-invite-chatroom" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows to send an invitation to a user to enter the chatroom:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">sendInvite</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_jid</span></code>
+- The user jid. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="create-user">
+<h3>Create user<a class="headerlink" href="#create-user" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows create an user in xmpp server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">createUser</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">username</span></code>
+- The user username. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">password</span></code>
+- The user password. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="set-affiliation">
+<h3>Set affiliation<a class="headerlink" href="#set-affiliation" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows to set an affiliation to user.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">setAffiliation</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_jid</span></code>
+- The user jid. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">affiliation</span></code>
+- The type of affiliation. Can be <code class="docutils literal"><span class="pre">outcast</span></code>, <code class="docutils literal"><span class="pre">member</span></code>, <code class="docutils literal"><span class="pre">admin</span></code>, <code class="docutils literal"><span class="pre">owner</span></code>, <code class="docutils literal"><span class="pre">none</span></code>. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="set-role">
+<h3>Set role<a class="headerlink" href="#set-role" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">POST</span></code> request allows create an user in xmpp server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">setRole</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_nick</span></code>
+- The user nick. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">role</span></code>
+- The type of role. Can be <code class="docutils literal"><span class="pre">moderator</span></code>, <code class="docutils literal"><span class="pre">participant</span></code>, <code class="docutils literal"><span class="pre">visitor</span></code>, <code class="docutils literal"><span class="pre">none</span></code>. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="delete-requests">
+<h3>DELETE requests<a class="headerlink" href="#delete-requests" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="remove-a-chatroom">
+<h3>Remove a chatroom<a class="headerlink" href="#remove-a-chatroom" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">DELETE</span></code> request allows to remove a chatroom:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5001</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">chat_room_jid</span></code>
+- The chatroom jid. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> that contains a set of permissions and that was provided by this service. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<p>On all requests if an error occurs it is returned a json with the following format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">error</span> <span class="nb">type</span><span class="p">,</span>
+ <span class="s1">&#39;msg&#39;</span>  <span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+ <span class="s1">&#39;code&#39;</span> <span class="p">:</span> <span class="n">HTTP</span> <span class="n">code</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">error</span> <span class="pre">type</span></code> refers to the entity/method that triggered the error and the <code class="docutils literal"><span class="pre">message</span></code> is a hint to understand
+the error.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">chatRoom</span></code> - Internal database error performing an chatroom query.  Missing permission to perform this operation, chatroom does not exist.</li>
+<li><code class="docutils literal"><span class="pre">createAndConfigureChatRoom</span></code> - Internal database error performing an chatroom insert.</li>
+<li><code class="docutils literal"><span class="pre">removeChatRoom</span></code> - Internal database error performing an chatroom delete. Missing permission to perform this operation, chatroom does not exist.</li>
+</ul>
+<p>Most common errors:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+---------------+------------------------+</span>
+<span class="o">|</span> <span class="n">HTTP</span>  <span class="n">Code</span>    <span class="o">|</span>      <span class="n">Description</span>       <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">400</span>       <span class="o">|</span>  <span class="n">Bad</span> <span class="n">Request</span>           <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">403</span>       <span class="o">|</span>  <span class="n">Forbidden</span>             <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">417</span>       <span class="o">|</span>  <span class="n">Expectation</span> <span class="n">Failed</span>    <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">405</span>       <span class="o">|</span>  <span class="n">Method</span> <span class="n">Not</span> <span class="n">Allowed</span>    <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+<span class="o">|</span>     <span class="mi">500</span>       <span class="o">|</span>  <span class="n">Internal</span> <span class="n">Server</span> <span class="n">Error</span> <span class="o">|</span>
+<span class="o">+---------------+------------------------+</span>
+</pre></div>
+</div>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not provided: {“message”: “The browser (or proxy) sent a request that this server could not understand.”}</p>
+<p>The following message is returned when the <code class="docutils literal"><span class="pre">OAuth</span> <span class="pre">2.0</span></code> is not valid, meaning that you arent authorized: {‘message’: “You don’t have the permission to access the requested resource. It is either read-protected or not readable by the server.”}</p>
+</div>
+<div class="section" id="request-examples">
+<h2>Request Examples<a class="headerlink" href="#request-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here we provide examples to each method, using <a class="reference external" href="http://docs.python-requests.org/en/master/">Requests</a> and
+<a class="reference external" href="https://curl.haxx.se/">cURL</a>.</p>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">POST</span></code></dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5014/chatManager/v1.0/createUser&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="mi">1112</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;mypassword&#39;</span><span class="p">,</span> <span class="n">access_toke</span><span class="p">:</span><span class="s1">&#39;hello_world&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">username</span><span class="s1">&#39;: teamup, &#39;</span><span class="n">password</span><span class="s1">&#39;: &#39;</span><span class="n">mypassword</span><span class="s1">&#39;, access_toke:&#39;</span><span class="n">hello_world</span><span class="s1">&#39;}&#39;</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5014</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">createUser</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5014/chatManager/v1.0/createAndConfigureChatRoom&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;50@conference.deti-es-04.ua.pt&#39;</span><span class="p">,</span> <span class="s1">&#39;room_name&#39;</span><span class="p">:</span> <span class="s1">&#39;TeamUp&#39;</span><span class="p">,</span> <span class="s1">&#39;room_desc&#39;</span><span class="p">:</span> <span class="s1">&#39;My room description&#39;</span><span class="p">,</span> <span class="s1">&#39;logging&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;invite&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;allow_pm&#39;</span><span class="p">:</span><span class="s1">&#39;anyone&#39;</span><span class="p">,</span> <span class="s1">&#39;max_users&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;public_room&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;persistent_room&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="s1">&#39;moderated_room&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;members_only&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;disc_JID&#39;</span><span class="p">:</span><span class="s1">&#39;moderators&#39;</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span><span class="s1">&#39;hello_world&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">chat_room_jid</span><span class="s1">&#39;: &#39;</span><span class="mi">50</span><span class="nd">@conference</span><span class="o">.</span><span class="n">deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="s1">&#39;, &#39;</span><span class="n">room_name</span><span class="s1">&#39;: &#39;</span><span class="n">TeamUp</span><span class="s1">&#39;, &#39;</span><span class="n">room_desc</span><span class="s1">&#39;: &#39;</span><span class="n">My</span> <span class="n">room</span> <span class="n">description</span><span class="s1">&#39;, &#39;</span><span class="n">logging</span><span class="s1">&#39;:1, &#39;</span><span class="n">invite</span><span class="s1">&#39;:1, &#39;</span><span class="n">allow_pm</span><span class="s1">&#39;:&#39;</span><span class="n">anyone</span><span class="s1">&#39;, &#39;</span><span class="n">max_users</span><span class="s1">&#39;: 50, &#39;</span><span class="n">public_room</span><span class="s1">&#39;: 1, &#39;</span><span class="n">persistent_room</span><span class="s1">&#39;: 1,&#39;</span><span class="n">moderated_room</span><span class="s1">&#39;: 0, &#39;</span><span class="n">members_only</span><span class="s1">&#39;: 0, &#39;</span><span class="n">disc_JID</span><span class="s1">&#39;:&#39;</span><span class="n">moderators</span><span class="s1">&#39;, access_token:&#39;</span><span class="n">hello_world</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5014</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">createAndConfigureChatRoom</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5014/chatManager/v1.0/sendInvite&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;1112@deti-es-04.ua.pt/Ruis-MacBook-Pro&#39;</span><span class="p">,</span><span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;50@conference.deti-es-04.ua.pt&#39;</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span><span class="s1">&#39;hello_world&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">user_jid</span><span class="s1">&#39;: &#39;</span><span class="mi">1112</span><span class="nd">@deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="o">/</span><span class="n">Ruis</span><span class="o">-</span><span class="n">MacBook</span><span class="o">-</span><span class="n">Pro</span><span class="s1">&#39;,&#39;</span><span class="n">chat_room_jid</span><span class="s1">&#39;: &#39;</span><span class="mi">50</span><span class="nd">@conference</span><span class="o">.</span><span class="n">deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="s1">&#39;, access_token:&#39;</span><span class="n">hello_world</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5014</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">sendInvite</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5014/chatManager/v1.0/sendMessage&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;50@conference.deti-es-04.ua.pt&#39;</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span><span class="s1">&#39;heeey&#39;</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span><span class="s1">&#39;hello_world&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">user_jid</span><span class="s1">&#39;: &#39;</span><span class="mi">1112</span><span class="nd">@deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="o">/</span><span class="n">Ruis</span><span class="o">-</span><span class="n">MacBook</span><span class="o">-</span><span class="n">Pro</span><span class="s1">&#39;,&#39;</span><span class="n">chat_room_jid</span><span class="s1">&#39;: &#39;</span><span class="mi">50</span><span class="nd">@conference</span><span class="o">.</span><span class="n">deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="s1">&#39;, access_token:&#39;</span><span class="n">hello_world</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5014</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">sendMessage</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5014/chatManager/v1.0/leaveChatRoom&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;50@conference.deti-es-04.ua.pt&#39;</span><span class="p">,</span> <span class="s1">&#39;nick&#39;</span><span class="p">:</span><span class="s1">&#39;managerBot&#39;</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span><span class="s1">&#39;hello_world&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">chat_room_jid</span><span class="s1">&#39;: &#39;</span><span class="mi">50</span><span class="nd">@conference</span><span class="o">.</span><span class="n">deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="s1">&#39;, &#39;</span><span class="n">nick</span><span class="s1">&#39;:&#39;</span><span class="n">managerBot</span><span class="s1">&#39;, access_token:&#39;</span><span class="n">hello_world</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5014</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">leaveChatRoom</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5014/chatManager/v1.0/setAffiliation&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;60@conference.deti-es-04.ua.pt&#39;</span><span class="p">,</span> <span class="s1">&#39;user_jid&#39;</span><span class="p">:</span><span class="s1">&#39;teamup@deti-es-04.ua.pt/teamup&#39;</span><span class="p">,</span> <span class="s1">&#39;affiliation&#39;</span><span class="p">:</span><span class="s1">&#39;outcast&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span><span class="s1">&#39;hello_world&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">chat_room_jid</span><span class="s1">&#39;: &#39;</span><span class="mi">60</span><span class="nd">@conference</span><span class="o">.</span><span class="n">deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="s1">&#39;, &#39;</span><span class="n">user_jid</span><span class="s1">&#39;:&#39;</span><span class="n">teamup</span><span class="nd">@deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="o">/</span><span class="n">teamup</span><span class="s1">&#39;, &#39;</span><span class="n">affiliation</span><span class="s1">&#39;:&#39;</span><span class="n">outcast</span><span class="s1">&#39;, &#39;</span><span class="n">access_token</span><span class="s1">&#39;:&#39;</span><span class="n">hello_world</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5014</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">setAffiliation</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5014/chatManager/v1.0/setRole&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;60@conference.deti-es-04.ua.pt&#39;</span><span class="p">,</span> <span class="s1">&#39;user_nick&#39;</span><span class="p">:</span><span class="s1">&#39;teamup@deti-es-04.ua.pt/teamup&#39;</span><span class="p">,</span> <span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;member&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span><span class="s1">&#39;hello_world&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&#39;</span><span class="n">chat_room_jid</span><span class="s1">&#39;: &#39;</span><span class="mi">60</span><span class="nd">@conference</span><span class="o">.</span><span class="n">deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="s1">&#39;, &#39;</span><span class="n">user_nick</span><span class="s1">&#39;:&#39;</span><span class="n">teamup</span><span class="nd">@deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span><span class="o">/</span><span class="n">teamup</span><span class="s1">&#39;, &#39;</span><span class="n">role</span><span class="s1">&#39;: &#39;</span><span class="n">member</span><span class="s1">&#39;, &#39;</span><span class="n">access_token</span><span class="s1">&#39;:&#39;</span><span class="n">hello_world</span><span class="s1">&#39;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5014</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">setRole</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">DELETE</span></code></dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5014/chatManager/v1.0/&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;chat_room_jid&#39;</span><span class="p">:</span> <span class="s1">&#39;50@conference.deti-es-04.ua.pt&#39;</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span><span class="s1">&#39;hello_world&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">DELETE</span> <span class="o">-</span><span class="n">G</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5014</span><span class="o">/</span><span class="n">chatManager</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span> <span class="o">-</span><span class="n">d</span> <span class="n">chat_room_jid</span><span class="o">=</span><span class="mi">50</span><span class="nd">@conference</span><span class="o">.</span><span class="n">deti</span><span class="o">-</span><span class="n">es</span><span class="o">-</span><span class="mf">04.</span><span class="n">ua</span><span class="o">.</span><span class="n">pt</span>  <span class="o">-</span><span class="n">d</span> <span class="n">access_token</span><span class="o">=</span><span class="n">helloworld</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, TeamUp.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

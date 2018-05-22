@@ -1,0 +1,1193 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Application Server documentation! &mdash; ApplicationServer 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ApplicationServer 1.0.0 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> ApplicationServer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to <code class="docutils literal"><span class="pre">Application</span> <span class="pre">Server</span></code> documentation!</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#routing">Routing</a></li>
+<li><a class="reference internal" href="#message-transformation-message-processing">Message Transformation/Message Processing</a></li>
+<li><a class="reference internal" href="#process-choreography">Process Choreography</a></li>
+<li><a class="reference internal" href="#protocol-transformation">Protocol Transformation</a></li>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#application-server-interface">Application Server Interface</a></li>
+<li><a class="reference internal" href="#application-server-services">Application Server Services</a><ul>
+<li><a class="reference internal" href="#login">Login</a></li>
+<li><a class="reference internal" href="#create-event">Create Event</a></li>
+<li><a class="reference internal" href="#update-event">Update Event</a></li>
+<li><a class="reference internal" href="#update-user">Update User</a></li>
+<li><a class="reference internal" href="#search-event">Search Event</a></li>
+<li><a class="reference internal" href="#add-user">Add User</a></li>
+<li><a class="reference internal" href="#add-schedule">Add Schedule</a></li>
+<li><a class="reference internal" href="#add-location">Add Location</a></li>
+<li><a class="reference internal" href="#vote-datetime">Vote Datetime</a></li>
+<li><a class="reference internal" href="#vote-local">Vote Local</a></li>
+<li><a class="reference internal" href="#get-groups">Get Groups</a></li>
+<li><a class="reference internal" href="#get-group">Get Group</a></li>
+<li><a class="reference internal" href="#notifications-manager">Notifications Manager</a></li>
+<li><a class="reference internal" href="#invite-friends">Invite Friends</a></li>
+<li><a class="reference internal" href="#leave-group">Leave Group</a></li>
+<li><a class="reference internal" href="#delete-group">Delete Group</a></li>
+<li><a class="reference internal" href="#authentication-app">Authentication App</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#request-examples">Request Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ApplicationServer</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to <code class="docutils literal"><span class="pre">Application</span> <span class="pre">Server</span></code> documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-application-server-documentation">
+<h1>Welcome to <code class="docutils literal"><span class="pre">Application</span> <span class="pre">Server</span></code> documentation!<a class="headerlink" href="#welcome-to-application-server-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Application</span> <span class="pre">Server</span></code> provides an abstraction layer on the implementation of a communication system between mutually interacting software applications in a service oriented architecture(SOA).
+It should not be treated as a service. Although providing an interface with some methods should be considered as a bus that distribute information between services.
+The main capabilities of this component are:
+- Routing
+- Message Transformation/Message Processing
+- Process Choreography
+- Protocol Transformation
+- Security
+Basically acts like a mediator, an enterprise service bus(ESB), between the mobile applicationss and the enterprise services.
+The communication on the left side, that is on the input between the mobile applications and the Application Server is always is done over HTTP using POST methods. Request is formatted as JSON, and the content type is <code class="docutils literal"><span class="pre">application/json</span></code>.
+On the enterprise side, the communication is mainly done over HTTP, however in some cases it uses mqtt protocol and a message broker - <a class="reference external" href="https://mosquitto.org/">Mosquitto</a>.</p>
+<p>Currently is in the <code class="docutils literal"><span class="pre">version</span> <span class="pre">1.0</span></code>.</p>
+</div>
+<div class="section" id="routing">
+<h2>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h2>
+<p>The ability to channel a request to a particular service provider based on deterministic or variable criteria. For example, the authentication process between the mobile applications and the authentication server is routed by the application server based on requests content. The process is composed by two sequencial requests: the first one must be a POST and the last one a GET request. Based on that the Application Server route the requests to the Authentication Server.</p>
+</div>
+<div class="section" id="message-transformation-message-processing">
+<h2>Message Transformation/Message Processing<a class="headerlink" href="#message-transformation-message-processing" title="Permalink to this headline">¶</a></h2>
+<p>Convert the structure and format of the incoming business service request to the structure and format expected by the service provider. For example, given a request to vote on a schedule for a specific event the Application Server must receive two parameters: the event identifier(event_id) and a schedule available for the respective event(schedule). The message that the schedule manager service expects is a little bit different and the necessary modifications are done by the Application Server in order to respond successfully to the resolution of the various requests.</p>
+</div>
+<div class="section" id="process-choreography">
+<h2>Process Choreography<a class="headerlink" href="#process-choreography" title="Permalink to this headline">¶</a></h2>
+<p>Manage complex business process that requires the coordination of multiple business service to fulfil a single business service request. For example given a request to create an event there are a couple of requests that need to be done over multiple services in order to complete all the subprocesses triggered by the application server, where the input was the user action.
+The processes/services are:</p>
+<ul class="simple">
+<li>create event              - Events Manager Service</li>
+<li>create chat room          - Chat Manager Service</li>
+<li>look up coordinates       - Geolocation Service</li>
+<li>create datetime schedule  - Schedule Manager Service</li>
+<li>create event              - Location Manager Service</li>
+<li>add each event schedule   - Schedule Manager Service</li>
+<li>add each event location   - Location Manager Service</li>
+</ul>
+</div>
+<div class="section" id="protocol-transformation">
+<h2>Protocol Transformation<a class="headerlink" href="#protocol-transformation" title="Permalink to this headline">¶</a></h2>
+<p>Accept one type of protocol from the consumer as input (i.e.SOAP/JMS) and communicate to the service provider through a different protocol (i.e. IIOP). For example, given a notification requests related to temporal approximation of an event, the input request is done over HTTP and the appserver process the communication to the Presence Manager Service over MQTT.</p>
+</div>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
+<p>Protect enterprise services from unauthorized access. In SOA there are no more silos, services become visible to the entire enterprise through ESB. ESB should access a security manager or authentication and authorization rather than have the direct responsibility.
+In relation to the Authentication the Application Server is authenticated over a Authentication Service by a process that contains two requests: the first one is a POST and the last one is a GET. As above the process is the same as in mobile applications.
+Every request to the Application Server must contain a valid Json Web Token(JWT) to provide authentication of the entity and allow to the esb confirm it close to the Authentication Service providing also its JWT.
+Concerning to the authorization, the application server acts like a client to the enterprise services. Before you can receive commands, the application server must obtain an authorization token for all services it communicates with, except for the authentication server and the presence manager.
+The authorization is completed in 3 steps: the first concerns the registration of a redirect url, to receive the grant, and the desired scopes. The second and the third are related to obtaining the grant and the OAuth 2.0 token respectively. The first and second step must contain an <code class="docutils literal"><span class="pre">JWT-Bearer</span></code> to provide authentication and check it over the Authentication Server and only provide access to the service if the client is authenticated.</p>
+</div>
+<div class="section" id="application-server-interface">
+<h2>Application Server Interface<a class="headerlink" href="#application-server-interface" title="Permalink to this headline">¶</a></h2>
+<p>The application server exports multiple methods according to the operations around the context. The structure is simple and follows the next rule: given a base url - <a class="reference external" href="http://127.0.0.1:5012/proxy/">http://127.0.0.1:5012/proxy/</a> - and a desired operation - i.e: login - the final url to materialize is the concatenation of both: <a class="reference external" href="http://127.0.0.1:5012/proxy/login">http://127.0.0.1:5012/proxy/login</a>. Hereupon, the methods implamented and the respective url are</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd><ul class="first last simple">
+<li>login                   - <a class="reference external" href="http://127.0.0.1:5012/proxy/login">http://127.0.0.1:5012/proxy/login</a></li>
+<li>create event            - <a class="reference external" href="http://127.0.0.1:5012/proxy/create_event">http://127.0.0.1:5012/proxy/create_event</a></li>
+<li>update event            - <a class="reference external" href="http://127.0.0.1:5012/proxy/update_event">http://127.0.0.1:5012/proxy/update_event</a></li>
+<li>update user             - <a class="reference external" href="http://127.0.0.1:5012/proxy/update_user">http://127.0.0.1:5012/proxy/update_user</a></li>
+<li>search event            - <a class="reference external" href="http://127.0.0.1:5012/proxy/search">http://127.0.0.1:5012/proxy/search</a></li>
+<li>add user                - <a class="reference external" href="http://127.0.0.1:5012/proxy/add_user">http://127.0.0.1:5012/proxy/add_user</a></li>
+<li>add schedules           - <a class="reference external" href="http://127.0.0.1:5012/proxy/add_schedule">http://127.0.0.1:5012/proxy/add_schedule</a></li>
+<li>add location            - <a class="reference external" href="http://127.0.0.1:5012/proxy/add_location">http://127.0.0.1:5012/proxy/add_location</a></li>
+<li>vote datetime           - <a class="reference external" href="http://127.0.0.1:5012/proxy/vote_datetime">http://127.0.0.1:5012/proxy/vote_datetime</a></li>
+<li>vote local              - <a class="reference external" href="http://127.0.0.1:5012/proxy/vote_local">http://127.0.0.1:5012/proxy/vote_local</a></li>
+<li>get groups              - <a class="reference external" href="http://127.0.0.1:5012/proxy/get_group">http://127.0.0.1:5012/proxy/get_group</a></li>
+<li>get groups              - <a class="reference external" href="http://127.0.0.1:5012/proxy/get_groups">http://127.0.0.1:5012/proxy/get_groups</a></li>
+<li>notifications manager   - <a class="reference external" href="http://127.0.0.1:5012/proxy/notifications_manager">http://127.0.0.1:5012/proxy/notifications_manager</a></li>
+<li>invite friends          - <a class="reference external" href="http://127.0.0.1:5012/proxy/invite_friends">http://127.0.0.1:5012/proxy/invite_friends</a></li>
+<li>leave group             - <a class="reference external" href="http://127.0.0.1:5012/proxy/leave_group">http://127.0.0.1:5012/proxy/leave_group</a></li>
+<li>delete group            - <a class="reference external" href="http://127.0.0.1:5012/proxy/delete_group">http://127.0.0.1:5012/proxy/delete_group</a></li>
+<li>authentication app      - <a class="reference external" href="http://127.0.0.1:5012/proxy/authentication_app">http://127.0.0.1:5012/proxy/authentication_app</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="application-server-services">
+<h2>Application Server Services<a class="headerlink" href="#application-server-services" title="Permalink to this headline">¶</a></h2>
+<p>All services are registered in the application server and it establishes communication with them for a certain purpose described by each method of the receiving service. The services are:</p>
+<ul class="simple">
+<li>Alarm Manager Service</li>
+<li>Authentication Service</li>
+<li>Chat Manager Service</li>
+<li>Events Manager Service</li>
+<li>Facebook Service</li>
+<li>Geolocation Service</li>
+<li>Location Manager Service</li>
+<li>Presence Manager Service</li>
+<li>Push Notifications Service</li>
+<li>Schedule Manager Service</li>
+<li>Sms Service</li>
+<li>User Profiling Service</li>
+<li>Weather Service</li>
+</ul>
+<div class="section" id="login">
+<h3>Login<a class="headerlink" href="#login" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to login into the application. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Facebook            - Method: POST <a class="reference external" href="http://127.0.0.1:5003/facebook/v1.0/">http://127.0.0.1:5003/facebook/v1.0/</a></li>
+<li>Service - Chat Manager        - Method: POST <a class="reference external" href="http://127.0.0.1:5014/chatManager/v1.0/createUser">http://127.0.0.1:5014/chatManager/v1.0/createUser</a></li>
+<li>Service - User Profiling      - Method: POST <a class="reference external" href="http://127.0.0.1:5007/userProfiling/v1.0/userProfile/create">http://127.0.0.1:5007/userProfiling/v1.0/userProfile/create</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">login</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user_id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">fb_access_token</span></code>:
+- The <code class="docutils literal"><span class="pre">fb_access_token</span></code> is provided by the facebook and follows the permissions given by the user. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">expires_in</span></code>:
+- The <code class="docutils literal"><span class="pre">time</span></code> in which the token expires. Type <strong>int</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="create-event">
+<h3>Create Event<a class="headerlink" href="#create-event" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to create an event with the respective configurations, locations and schedules. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Events Manager      - Method: POST <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/create">http://127.0.0.1:5002/eventsManager/v1.1/events/create</a></li>
+<li>Service - Chat Manager        - Method: POST <a class="reference external" href="http://127.0.0.1:5014/chatManager/v1.0/createAndConfigureChatRoom">http://127.0.0.1:5014/chatManager/v1.0/createAndConfigureChatRoom</a></li>
+<li>Service - Presence Manager</li>
+<li>Service - Geolocation         - Method: GET  <a class="reference external" href="http://127.0.0.1:5004/geolocation/v1.0/lookup">http://127.0.0.1:5004/geolocation/v1.0/lookup</a></li>
+<li>Service - Schedule Manager    - Method: POST <a class="reference external" href="http://127.0.0.1:5006/scheduleManager/v1.0/schedule/postRequest">http://127.0.0.1:5006/scheduleManager/v1.0/schedule/postRequest</a></li>
+<li>Service - Location Manager    - Method: POST <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/Event_location/">http://127.0.0.1:5005/locationManager/v1.1/Event_location/</a></li>
+<li>Service - Location Manager    - Method: POST <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/add_location">http://127.0.0.1:5005/locationManager/v1.1/voting/add_location</a></li>
+<li>Service - Schedule Manager    - Method: POST <a class="reference external" href="http://127.0.0.1:5006/scheduleManager/v1.0/schedule/postSchedule">http://127.0.0.1:5006/scheduleManager/v1.0/schedule/postSchedule</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">create_event</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">name</span></code>
+- The event <code class="docutils literal"><span class="pre">name</span></code>. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">type</span></code>
+- The event <code class="docutils literal"><span class="pre">type</span></code>, can be 0 to public or 1 to private. The default is 0. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">activity</span></code>
+- The <code class="docutils literal"><span class="pre">activity</span></code> that the event is related to. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">maxppl</span></code>
+- The <code class="docutils literal"><span class="pre">maximum</span> <span class="pre">number</span></code> of people that the event allow. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">minppl</span></code>
+- The <code class="docutils literal"><span class="pre">minimum</span> <span class="pre">number</span></code> of people that the event allow. The default is 0. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">owner</span></code>
+- The event <code class="docutils literal"><span class="pre">owner</span></code>. It has all the permissions over its event. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">description</span></code>
+- The event <code class="docutils literal"><span class="pre">description</span></code>, it have a maximum of 140 characters. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">locations</span></code>
+- The <code class="docutils literal"><span class="pre">locations</span></code> are the coordinates(latitude and longitude) where the event may happen. Type list of <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">locations_priority</span></code>
+- The <code class="docutils literal"><span class="pre">locations</span> <span class="pre">priority</span></code> are priotirites given by the owner to tie up when two or more locations have the same number of votes. The priority is directly related with the locations, so, the first tuple of locations has a priority with a value on the first position of the list of priorities, and so on. Type list of <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">schedules</span></code>
+- The <code class="docutils literal"><span class="pre">schedules</span></code> are the schedules(epoch timestamp) when the event may happen. Type list of <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">schedules_priority</span></code>
+- The <code class="docutils literal"><span class="pre">schedules</span> <span class="pre">priority</span></code> are priotirites given by the owner to tie up when two or more schedules have the same number of votes. The priority is directly related with the schedules, so, the first  schedule has a priority with a value on the first position of the list of priorities, and so on. Type list of <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">decision</span></code>
+- The <code class="docutils literal"><span class="pre">decision</span></code> is the datetime of the decision day, where the event will have a location and a datetime. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’, ‘event_id’: ‘event identifier’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="update-event">
+<h3>Update Event<a class="headerlink" href="#update-event" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to update an existing event. Only the owner of a event can update it.. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Events Manager      - Method: POST <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/update">http://127.0.0.1:5002/eventsManager/v1.1/events/update</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">update_event</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user</span> <span class="pre">id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">name</span></code>
+- The event <code class="docutils literal"><span class="pre">name</span></code>. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">type</span></code>
+- The event <code class="docutils literal"><span class="pre">type</span></code>, can be 0 to public or 1 to private. The default is 0. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">activity</span></code>
+- The <code class="docutils literal"><span class="pre">activity</span></code> that the event is related to. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">maxppl</span></code>
+- The <code class="docutils literal"><span class="pre">maximum</span> <span class="pre">number</span></code> of people that the event allow. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">minppl</span></code>
+- The <code class="docutils literal"><span class="pre">minimum</span> <span class="pre">number</span></code> of people that the event allow. The default is 0. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">owner</span></code>
+- The event <code class="docutils literal"><span class="pre">owner</span></code>. It has all the permissions over its event. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">description</span></code>
+- The event <code class="docutils literal"><span class="pre">description</span></code>, it have a maximum of 140 characters. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="update-user">
+<h3>Update User<a class="headerlink" href="#update-user" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to update its profile. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - User Profiling            - Method: POST <a class="reference external" href="http://127.0.0.1:5007/userProfiling/v1.0/userProfile/update">http://127.0.0.1:5007/userProfiling/v1.0/userProfile/update</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">update_user</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user_id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">username</span></code>:
+- The <code class="docutils literal"><span class="pre">username</span></code> is the new username. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">tlm</span></code>:
+- The <code class="docutils literal"><span class="pre">tlm</span></code> is the phone number where the user will be notified. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="search-event">
+<h3>Search Event<a class="headerlink" href="#search-event" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to search for an event according 3 parameters. Given the request the following services are contacted, by this order and parameters(zone, activity):</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Service - Geolocation                 - Method: POST <a class="reference external" href="http://127.0.0.1:5004/geolocation/v1.0/">http://127.0.0.1:5004/geolocation/v1.0/</a></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>zone, activity</dt>
+<dd><ul class="first last">
+<li>Service - Events Manager      - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Location Manager    - Method: GET <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted">http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted</a></li>
+<li>Service - Geolocation         - Method: GET <a class="reference external" href="http://127.0.0.1:5004/geolocation/v1.0/geocode">http://127.0.0.1:5004/geolocation/v1.0/geocode</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>zone, no activity</dt>
+<dd><ul class="first last">
+<li>Service - Events Manager      - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Location Manager    - Method: GET <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted">http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted</a></li>
+<li>Service - Geolocation         - Method: GET <a class="reference external" href="http://127.0.0.1:5004/geolocation/v1.0/geocode">http://127.0.0.1:5004/geolocation/v1.0/geocode</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>no zone, activity</dt>
+<dd><ul class="first last">
+<li>Service - Events Manager      - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Location Manager    - Method: GET <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted">http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>no zone, no activity</dt>
+<dd><ul class="first last">
+<li>Service - Events Manager      - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Location Manager    - Method: GET <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted">http://127.0.0.1:5005/locationManager/v1.1/voting/three_most_voted</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">search</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user_id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">lat</span></code>
+- The <code class="docutils literal"><span class="pre">latitude</span></code> of the user. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">long</span></code>
+- The <code class="docutils literal"><span class="pre">longitude</span></code> of the user. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">zone</span></code>
+- The <code class="docutils literal"><span class="pre">zone</span></code> is where the user wants to get events. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">activity</span></code>
+- The <code class="docutils literal"><span class="pre">activity</span></code> which match the event activity, is a filter. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">distance</span></code>
+- The <code class="docutils literal"><span class="pre">distance</span></code> is the range where the user wants to get events, by default is 5 Km. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘event identifier’: [name, activity, zone]}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="add-user">
+<h3>Add User<a class="headerlink" href="#add-user" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user join a event. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - User Profiling              - Method: POST <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/users/">http://127.0.0.1:5002/eventsManager/v1.1/users/</a></li>
+<li>Service - ChatManager                 - Method: POST <a class="reference external" href="http://127.0.0.1:5014/chatManager/v1.0/sendInvite">http://127.0.0.1:5014/chatManager/v1.0/sendInvite</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">add_user</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user_id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="add-schedule">
+<h3>Add Schedule<a class="headerlink" href="#add-schedule" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to add or update a schedule to an event. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Schedule Manager            - Method: POST <a class="reference external" href="http://127.0.0.1:5006/scheduleManager/v1.0/schedule/postSchedule">http://127.0.0.1:5006/scheduleManager/v1.0/schedule/postSchedule</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">add_schedule</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">timestamp</span></code>
+- The epoch <code class="docutils literal"><span class="pre">timestamp</span></code> is the schedule that will be updated or added. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="add-location">
+<h3>Add Location<a class="headerlink" href="#add-location" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to add a possible location to an event. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Location Manager            - Method: POST <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/add_location">http://127.0.0.1:5005/locationManager/v1.1/voting/add_location</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">add_location</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">lat</span></code>
+- The <code class="docutils literal"><span class="pre">latitude</span></code> of the new location. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">long</span></code>
+- The <code class="docutils literal"><span class="pre">longitude</span></code> of the new location. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">priority</span></code>
+- The <code class="docutils literal"><span class="pre">priority</span></code> is the priority of the new location. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">city</span></code>
+- The <code class="docutils literal"><span class="pre">city</span></code> is the city of the respective location. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="vote-datetime">
+<h3>Vote Datetime<a class="headerlink" href="#vote-datetime" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to vote on a possible schedule related to an event. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Schedule Manager            - Method: POST <a class="reference external" href="http://127.0.0.1:5006/scheduleManager/v1.0/voting/">http://127.0.0.1:5006/scheduleManager/v1.0/voting/</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">vote_datetime</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">timestamp</span></code>
+- The epoch <code class="docutils literal"><span class="pre">timestamp</span></code> is schedule where it will be added a vote. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="vote-local">
+<h3>Vote Local<a class="headerlink" href="#vote-local" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to vote on a possible location related to an event. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Location Manager            - Method: POST <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/vote">http://127.0.0.1:5005/locationManager/v1.1/voting/vote</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">vote_local</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">lat</span></code>
+- The <code class="docutils literal"><span class="pre">latitude</span></code> of the location where it will be added a vote. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">long</span></code>
+- The <code class="docutils literal"><span class="pre">longitude</span></code> of the new location where it will be added a vote. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="get-groups">
+<h3>Get Groups<a class="headerlink" href="#get-groups" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to get all its groups and some information related to them. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Events Manager            - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/users/">http://127.0.0.1:5002/eventsManager/v1.1/users/</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">get_groups</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user_id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’, ‘events’: {‘public’: [], ‘private’: []}}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="get-group">
+<h3>Get Group<a class="headerlink" href="#get-group" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to get a detailed information about one groups where it belongs. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Events Manager            - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/users/">http://127.0.0.1:5002/eventsManager/v1.1/users/</a></li>
+<li>Service - Location Manager          - Method: GET <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/all_locations">http://127.0.0.1:5005/locationManager/v1.1/voting/all_locations</a></li>
+<li>Service - Schedule Manager          - Method: GET <a class="reference external" href="http://127.0.0.1:5006/scheduleManager/v1.0/schedule/">http://127.0.0.1:5006/scheduleManager/v1.0/schedule/</a></li>
+<li>Service - Weather                   - Method: GET <a class="reference external" href="http://127.0.0.1:5008/weatherproxy/v1.0/">http://127.0.0.1:5008/weatherproxy/v1.0/</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">get_group</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘name’: ‘event name’, ‘description’: ‘event description’, ‘activity’: ‘event activity’, ‘atm’: ‘number of participant’, ‘locations’: [], ‘schedules’: [], ‘weather’: []}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="notifications-manager">
+<h3>Notifications Manager<a class="headerlink" href="#notifications-manager" title="Permalink to this headline">¶</a></h3>
+<p>Its a endpoint url where the services must send notifications requests that should be treated by a central endpoint, which communicates with the necessary around services. Given the request the following services are contacted, by this order and notification type:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>type - decision</dt>
+<dd><ul class="first last">
+<li>Service - Schedule Manager        - Method: GET <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/voting/most_voted">http://127.0.0.1:5005/locationManager/v1.1/voting/most_voted</a></li>
+<li>Service - Location Manager        - Method: GET <a class="reference external" href="http://127.0.0.1:5006/scheduleManager/v1.0/voting/">http://127.0.0.1:5006/scheduleManager/v1.0/voting/</a></li>
+<li>Service - Geolocation Manager     - Method: GET <a class="reference external" href="http://127.0.0.1:5004/geolocation/v1.0/lookup">http://127.0.0.1:5004/geolocation/v1.0/lookup</a></li>
+<li>Service - Events Manager          - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Events Manager          - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>type - weather</dt>
+<dd><ul class="first last">
+<li>Service - Events Manager          - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Events Manager          - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>type - reminder</dt>
+<dd><ul class="first last">
+<li>Service - Events Manager          - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Presence Manager</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>type - closed_event</dt>
+<dd><ul class="first last">
+<li>Service - Events Manager          - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Presence Manager</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">notifications_manager</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">type</span></code>
+- The <code class="docutils literal"><span class="pre">type</span></code> of the notification, but follow the especificated above. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">message</span></code>
+- The <code class="docutils literal"><span class="pre">message</span></code> of the notification, must be provided when type is weather. Type <strong>str</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="invite-friends">
+<h3>Invite Friends<a class="headerlink" href="#invite-friends" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to notify its friends on facebook to join to a specific group. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - User Profiling            - Method: GET <a class="reference external" href="http://127.0.0.1:5007/userProfiling/v1.0/userProfile/profile">http://127.0.0.1:5007/userProfiling/v1.0/userProfile/profile</a></li>
+<li>Service - Events Manager            - Method: GET <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Facebook                  - Method: GET <a class="reference external" href="http://127.0.0.1:5003/facebook/v1.0/">http://127.0.0.1:5003/facebook/v1.0/</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">invite_friends</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user_id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="leave-group">
+<h3>Leave Group<a class="headerlink" href="#leave-group" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user leave a group where it belongs. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Events Manager            - Method: DELETE <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/users/">http://127.0.0.1:5002/eventsManager/v1.1/users/</a></li>
+<li>Service - Chat Manager              - Method: POST <a class="reference external" href="http://127.0.0.1:5014/chatManager/v1.0/leaveChatRoom">http://127.0.0.1:5014/chatManager/v1.0/leaveChatRoom</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">leave_group</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user_id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="delete-group">
+<h3>Delete Group<a class="headerlink" href="#delete-group" title="Permalink to this headline">¶</a></h3>
+<p>Allows an user to delete an existing group. Given the request the following services are contacted, by this order:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Service - Events Manager            - Method: DELETE <a class="reference external" href="http://127.0.0.1:5002/eventsManager/v1.1/events/">http://127.0.0.1:5002/eventsManager/v1.1/events/</a></li>
+<li>Service - Schedule Manager          - Method: DELETE <a class="reference external" href="http://127.0.0.1:5006/scheduleManager/v1.0/schedule/deleteAll">http://127.0.0.1:5006/scheduleManager/v1.0/schedule/deleteAll</a></li>
+<li>Service - Location Manager          - Method: DELETE <a class="reference external" href="http://127.0.0.1:5005/locationManager/v1.1/Event_location/">http://127.0.0.1:5005/locationManager/v1.1/Event_location/</a></li>
+<li>Service - Alarm Manager             - Method: DELETE <a class="reference external" href="http://127.0.0.1:5001/alarmManager/v1.0/">http://127.0.0.1:5001/alarmManager/v1.0/</a></li>
+<li>Service - Chat Manager              - Method: POST <a class="reference external" href="http://127.0.0.1:5014/chatManager/v1.0/removeChatRoom">http://127.0.0.1:5014/chatManager/v1.0/removeChatRoom</a></li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">delete_group</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Request Body</dt>
+<dd><p class="first">The following fields are mandatory</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">user_id</span></code>
+- The <code class="docutils literal"><span class="pre">user_id</span></code> is the identifier of an user provided by the facebook. Type <strong>str</strong>.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">event_id</span></code>
+- The <code class="docutils literal"><span class="pre">event</span> <span class="pre">id</span></code> is the identifier of an event provided by the Events Manager Service. Type <strong>int</strong>.</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">access_token</span></code>
+- The <code class="docutils literal"><span class="pre">access</span> <span class="pre">token</span></code> is the JWT provided by the mobile applications to confirm its authentication. Type <strong>str</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Response Body</dt>
+<dd><p class="first last">{‘ack’: ‘true’}</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="authentication-app">
+<h3>Authentication App<a class="headerlink" href="#authentication-app" title="Permalink to this headline">¶</a></h3>
+<p>Allows an app to get authenticated. It routes the request to the . Given the request the following services are contacted, by this order and method:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>POST</dt>
+<dd><ul class="first last">
+<li>Service - Authentication          - Method: POST <a class="reference external" href="http://127.0.0.1:5013/v1.0/authentication/">http://127.0.0.1:5013/v1.0/authentication/</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GET</dt>
+<dd><ul class="first last">
+<li>Service - Authentication          - Method: GET <a class="reference external" href="http://127.0.0.1:5013/v1.0/authentication/get_token">http://127.0.0.1:5013/v1.0/authentication/get_token</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>The application server respective url is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">authentication_app</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="request-examples">
+<h2>Request Examples<a class="headerlink" href="#request-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here we provide examples to each method, using <a class="reference external" href="http://docs.python-requests.org/en/master/">Requests</a> and
+<a class="reference external" href="https://curl.haxx.se/">cURL</a>.</p>
+<blockquote>
+<div><p>login</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/login&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;facebook_id&#39;</span><span class="p">,</span> <span class="s1">&#39;fb_access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;access_token&#39;</span><span class="p">,</span> <span class="s1">&#39;expires_id&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;758941187514413&quot;, &quot;fb_access_token&quot;: &quot;access_token&quot;, &quot;expires_id&quot;: &quot;1234&quot;, access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">login</span>
+</pre></div>
+</div>
+<p>create event</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/create_event&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;fridays&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;activity&#39;</span><span class="p">:</span> <span class="s1">&#39;football&#39;</span><span class="p">,</span>
+<span class="s1">&#39;maxppl&#39;</span><span class="p">:</span> <span class="s1">&#39;16&#39;</span><span class="p">,</span> <span class="s1">&#39;minppl&#39;</span><span class="p">:</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;owner&#39;</span><span class="p">:</span> <span class="s1">&#39;758941187514413&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;for fun&#39;</span><span class="p">,</span> <span class="s1">&#39;locations&#39;</span><span class="p">:</span> <span class="s1">&#39;[[&#39;</span><span class="mf">40.6718599</span><span class="s1">&#39;, &#39;</span><span class="o">-</span><span class="mf">7.9047571</span><span class="s1">&#39;], [&#39;</span><span class="mf">40.6715311</span><span class="s1">&#39;, &#39;</span><span class="o">-</span><span class="mf">7.9115649</span><span class="s1">&#39;]]&#39;</span><span class="p">,</span> <span class="s1">&#39;locations_priority&#39;</span><span class="p">:</span> <span class="s1">&#39;[10,20]&#39;</span><span class="p">,</span> <span class="s1">&#39;schedules&#39;</span><span class="p">:</span> <span class="s1">&#39;[&#39;</span> <span class="mi">1515167577</span><span class="s1">&#39;, &#39;</span><span class="mi">1515253977</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;schedules_priority&#39;</span><span class="p">:</span> <span class="s1">&#39;[10,20]&#39;</span><span class="p">,</span> <span class="s1">&#39;decision&#39;</span><span class="p">:</span> <span class="s1">&#39;23:55 08/01/2018&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;name&quot;: &quot;fridays&quot;, &quot;type&quot;: &quot;1&quot;, &quot;activity&quot;: &quot;football&quot;, &quot;maxppl&quot;: &quot;16&quot;, &quot;minppl&quot;: &quot;8&quot;, &quot;owner&quot;: &quot;758941187514413&quot;, &quot;description&quot;: &quot;for fun&quot;, &quot;locations&quot;: &quot;[[&#39;</span><span class="mf">40.6718599</span><span class="s1">&#39;, &#39;</span><span class="o">-</span><span class="mf">7.9047571</span><span class="s1">&#39;], [&#39;</span><span class="mf">40.6715311</span><span class="s1">&#39;, &#39;</span><span class="o">-</span><span class="mf">7.9115649</span><span class="s1">&#39;]]&quot;, &quot;locations_priority&quot;: &quot;[10,20]&quot;, &quot;schedules&quot;: &quot;[&#39;</span> <span class="mi">1515167577</span><span class="s1">&#39;, &#39;</span><span class="mi">1515253977</span><span class="s1">&#39;]&quot;, &quot;schedules_priority&quot;: &quot;[10,20]&quot;, &quot;decision&quot;: &quot;23:55 08/01/2018&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">create_event</span>
+</pre></div>
+</div>
+<p>update event</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/update_event&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;758941187514413&#39;</span><span class="p">,</span> <span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;new name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;activity&#39;</span><span class="p">:</span> <span class="s1">&#39;basket&#39;</span><span class="p">,</span> <span class="s1">&#39;maxppl&#39;</span><span class="p">:</span> <span class="s1">&#39;20&#39;</span><span class="p">,</span> <span class="s1">&#39;minppl&#39;</span><span class="p">:</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;for fun&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;758941187514413&quot;, &quot;event_id&quot;: &quot;2&quot;, &quot;name&quot;: &quot;new name&quot;, &quot;type&quot;: &quot;1&quot;, &quot;activity&quot;: &quot;basket&quot;, &quot;maxppl&quot;: &quot;20&quot;, &quot;minppl&quot;: &quot;10&quot;, &quot;description&quot;: &quot;for fun&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">update_event</span>
+</pre></div>
+</div>
+<p>update user</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/update_user&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;682109031847376&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;teamup&#39;</span><span class="p">,</span> <span class="s1">&#39;tlm&#39;</span><span class="p">:</span> <span class="s1">&#39;969999999&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;682109031847376&quot;, &quot;username&quot;: &quot;teamup&quot;, &quot;tlm&quot;: &quot;969999999&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">update_user</span>
+</pre></div>
+</div>
+<p>search event</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/search&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;682109031847376&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;40.633774&#39;</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">:</span> <span class="s1">&#39;-8.646869&#39;</span><span class="p">,</span> <span class="s1">&#39;activity&#39;</span><span class="p">:</span> <span class="s1">&#39;football&#39;</span><span class="p">,</span> <span class="s1">&#39;zone&#39;</span><span class="p">:</span> <span class="s1">&#39;Aveiro&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">:</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;682109031847376&quot;, &quot;lat&quot;: &quot;40.633774&quot;, &quot;long&quot;: &quot;-8.646869&quot;, &quot;activity&quot;: &quot;football&quot;, &quot;zone&quot;: &quot;Aveiro&quot;, &quot;distance&quot;: &quot;10&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">search</span>
+</pre></div>
+</div>
+<p>add user</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/add_user&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;682109031847376&#39;</span><span class="p">,</span> <span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;682109031847376&quot;, &quot;event_id&quot;: &quot;2&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">add_user</span>
+</pre></div>
+</div>
+<p>add schedules</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/add_schedule&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;17:00 08/01/2018&#39;</span><span class="p">,</span> <span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;timestamp&quot;: &quot;17:00 08/01/2018&quot;, &quot;event_id&quot;: &quot;7&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">add_schedule</span>
+</pre></div>
+</div>
+<p>add location</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/add_location&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;40.640506&#39;</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">:</span> <span class="s1">&#39;-8.653754&#39;</span><span class="p">,</span> <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Aveiro&#39;</span><span class="p">,</span> <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;event_id&quot;: &quot;6&quot;, &quot;lat&quot;: &quot;40.640506&quot;, &quot;long&quot;: &quot;-8.653754&quot;, &quot;city&quot;: &quot;Aveiro&quot;, &quot;priority&quot;: &quot;5&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">add_location</span>
+</pre></div>
+</div>
+<p>vote datetime</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/vote_datetime&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;23:55 08/01/2018&#39;</span><span class="p">,</span> <span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;timestamp&quot;: &quot;23:55 08/01/2018&quot;, &quot;event_id&quot;: &quot;7&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">vote_datetime</span>
+</pre></div>
+</div>
+<p>vote local</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/vote_local&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;40.6303&#39;</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">:</span> <span class="s1">&#39;-8.6575&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;event_id&quot;: &quot;3&quot;, &quot;lat&quot;: &quot;40.6303&quot;, &quot;long&quot;: &quot;-8.6575&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">vote_local</span>
+</pre></div>
+</div>
+<p>get group</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/get_group&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;event_id&quot;: &quot;2&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">get_group</span>
+</pre></div>
+</div>
+<p>get groups</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/get_groups&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;682109031847376&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;682109031847376&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">get_groups</span>
+</pre></div>
+</div>
+<p>notifications manager</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/notifications_manager&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;reminder&#39;</span><span class="p">,</span> <span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;type&quot;: &quot;reminder&quot;, &quot;event_id&quot;: &quot;2&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">notifications_manager</span>
+</pre></div>
+</div>
+<p>invite friends</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/invite_friends&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;682109031847376&#39;</span><span class="p">,</span> <span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;682109031847376&quot;, &quot;event_id&quot;: &quot;7&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">invite_friends</span>
+</pre></div>
+</div>
+<p>leave group</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/leave_group&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;682109031847376&#39;</span><span class="p">,</span> <span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;682109031847376&quot;, &quot;event_id&quot;: &quot;7&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">leave_group</span>
+</pre></div>
+</div>
+<p>delete group</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/delete_group&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;682109031847376&#39;</span><span class="p">,</span> <span class="s1">&#39;event_id&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="s1">&#39;helloworld&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;user_id&quot;: &quot;682109031847376&quot;, &quot;event_id&quot;: &quot;7&quot;, &quot;access_token&quot;: &quot;helloworld&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">delete_group</span>
+</pre></div>
+</div>
+<p>authentication app (GET and POST):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/authentication_app&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;service_name&#39;</span><span class="p">}</span>
+
+<span class="p">::</span>
+
+    <span class="n">curl</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;username&quot;: &quot;service_name&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">authentication_app</span>
+
+<span class="p">::</span>
+    <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5012/proxy/authentication_app&#39;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;service_name&#39;</span><span class="p">,</span> <span class="s1">&#39;digest(nonce)+digest(password)&#39;</span><span class="p">))</span>
+
+<span class="p">::</span>
+
+    <span class="n">curl</span> <span class="o">-</span><span class="n">u</span> <span class="n">service_name</span><span class="p">:</span><span class="n">digest</span><span class="p">(</span><span class="n">nonce</span><span class="p">)</span><span class="o">+</span><span class="n">digest</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5012</span><span class="o">/</span><span class="n">proxy</span><span class="o">/</span><span class="n">authentication_app</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, TeamUP.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

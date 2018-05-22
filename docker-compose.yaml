@@ -1,0 +1,427 @@
+version: '2.1'
+services:
+  schedule_db:
+      container_name: schedule_db
+      build: Services/ScheduleManager/docker_db/.
+      image: "schedule_db"
+      ports:
+        - "33066:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.11
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=schedule_db
+        - MYSQL_USER=scheduleManager
+        - MYSQL_PASSWORD=schedule
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  schedulemanager:
+      container_name: schedulemanager
+      build: Services/ScheduleManager
+      image: "schedulemanager"
+      restart: on-failure
+      ports:
+        - "5006:5006"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.12
+      depends_on:
+            schedule_db:
+                condition: service_healthy
+
+
+  alarm_db:
+      container_name: alarm_db
+      build: Services/AlarmManager/alarm_db/.
+      image: "alarm_db"
+      ports:
+        - "33061:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.25
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=alarm_db
+        - MYSQL_USER=alarmManager
+        - MYSQL_PASSWORD=alarm
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  alarmmanager:
+      container_name: alarmmanager
+      build: Services/AlarmManager
+      image: "alarmmanager"
+      restart: "no"
+      ports:
+        - "5001:5001"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.26
+      depends_on:
+            alarm_db:
+                condition: service_healthy
+
+
+  events_db:
+      container_name: events_db
+      build: Services/EventsManager/docker_db/.
+      image: "events_db"
+      ports:
+        - "33062:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.3
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=events_db
+        - MYSQL_USER=eventsManager
+        - MYSQL_PASSWORD=events
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  eventsmanager:
+      container_name: eventsmanager
+      build: Services/EventsManager
+      image: "eventsmanager"
+      restart: on-failure
+      ports:
+        - "5002:5002"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.4
+      depends_on:
+            events_db:
+                condition: service_healthy
+
+
+  facebook_db:
+      container_name: facebook_db
+      build: Services/Facebook/docker_db/.
+      image: "facebook_db"
+      ports:
+        - "33063:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.5
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=facebook_db
+        - MYSQL_USER=facebookUser
+        - MYSQL_PASSWORD=facebook
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  facebook:
+      container_name: facebook
+      build: Services/Facebook
+      image: "facebook"
+      restart: on-failure
+      ports:
+        - "5003:5003"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.6
+      depends_on:
+            facebook_db:
+                condition: service_healthy
+
+
+  geolocation_db:
+      container_name: geolocation_db
+      build: Services/Geolocation/docker_db/.
+      image: "geolocation_db"
+      ports:
+        - "33064:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.7
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=geolocation_db
+        - MYSQL_USER=geolocationUser
+        - MYSQL_PASSWORD=geolocation
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  geolocation:
+      container_name: geolocation
+      build: Services/Geolocation
+      image: "geolocation"
+      restart: on-failure
+      ports:
+        - "5004:5004"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.8
+      environment:
+        - GOOGLEAPI_KEY=AIzaSyDG6IjBKa-1W2qxhw0X7DAEaxlRdlLZKAc
+      depends_on:
+            geolocation_db:
+                condition: service_healthy
+
+
+  location_db:
+      container_name: location_db
+      build: Services/LocationManager/docker_db/.
+      image: "location_db"
+      ports:
+        - "33065:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.9
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=location_db
+        - MYSQL_USER=locationManager
+        - MYSQL_PASSWORD=location
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  locationmanager:
+      container_name: locationmanager
+      build: Services/LocationManager
+      image: "locationmanager"
+      restart: on-failure
+      ports:
+        - "5005:5005"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.10
+      depends_on:
+            location_db:
+                condition: service_healthy
+
+  userprofiling_db:
+      container_name: userprofiling_db
+      build: Services/UserProfiling/docker_db/.
+      image: "userprofiling_db"
+      ports:
+        - "33067:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.13
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=userprofiling_db
+        - MYSQL_USER=userprofiling
+        - MYSQL_PASSWORD=profiling
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  userprofiling:
+      container_name: userprofiling
+      build: Services/UserProfiling
+      image: "userprofiling"
+      restart: on-failure
+      ports:
+        - "5007:5007"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.14
+      depends_on:
+            userprofiling_db:
+                condition: service_healthy
+
+  openweather:
+      container_name: openweather
+      build: Services/OpenWeather
+      image: "openweather"
+      restart: on-failure
+      ports:
+        - "5009:5009"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.18
+      environment:
+        - OPW_KEY=8dee3f6fa9e4ebedd4093446645a5087
+
+  undergroundweather:
+      container_name: undergroundweather
+      build: Services/UndergroundWeather
+      image: "undergroundweather"
+      restart: on-failure
+      ports:
+        - "5010:5010"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.20
+      environment:
+        - UNDER_KEY=822e92c383fd2951
+
+  weatherproxy_db:
+      container_name: weatherproxy_db
+      build: Services/Weather/docker_db/.
+      image: "weatherproxy_db"
+      ports:
+        - "33068:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.15
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=alarm_weather_db
+        - MYSQL_USER=alarmManager
+        - MYSQL_PASSWORD=alarm
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+                
+  authentication:
+      container_name: authentication
+      build: Services/AuthenticationServer
+      image: "authentication"
+      restart: on-failure
+      ports:
+        - "5013:5013"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.27
+
+  appserver:
+      container_name: appserver
+      build: AppServer/.
+      image: "appserver"
+      depends_on:
+        - authentication
+      restart: on-failure
+      ports:
+        - "5012:5012"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.24
+
+  weatherproxy:
+      container_name: weatherproxy
+      build: Services/Weather
+      image: "weatherproxy"
+      depends_on:
+        - undergroundweather
+        - openweather
+      restart: on-failure
+      ports:
+        - "5008:5008"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.16
+
+  smsmanager:
+      container_name: smsmanager
+      build: Services/SmsManager
+      image: "smsmanager"
+      restart: on-failure
+      ports:
+        - "5016:5016"
+      networks:
+      networks:
+        snet:
+          ipv4_address: 172.18.0.31
+
+  pushnotification:
+      container_name: pushnotification
+      build: Services/PushNotification
+      image: "pushnotification"
+      restart: on-failure
+      ports:
+        - "5017:5017"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.32
+
+  mosquitto:
+      container_name: mosquitto
+      image: "eclipse-mosquitto"
+      restart: on-failure
+      ports:
+        - "1183:1183"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.33
+
+  chatmanager_db:
+      container_name: chatmanager_db
+      build: Services/ChatManager/chat_db/.
+      image: "chatmanager_db"
+      ports:
+        - "33069:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.35
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=chat_db
+        - MYSQL_USER=chatManager
+        - MYSQL_PASSWORD=chatmanager
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  chatmanager:
+      container_name: chatmanager
+      build: Services/ChatManager
+      image: "chatmanager"
+      restart: on-failure
+      ports:
+        - "5014:5014"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.34
+      depends_on:
+            chatmanager_db:
+                condition: service_healthy
+
+  presence_db:
+      container_name: presence_db
+      build: Services/PresenceManager/presence_db/.
+      image: "presence_db"
+      ports:
+        - "33070:3306"
+      networks:
+        snet:
+          ipv4_address: 172.18.0.36
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=presence_db
+        - MYSQL_USER=presenceManager
+        - MYSQL_PASSWORD=presence
+      healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 15
+
+  presencemanager:
+      container_name: presencemanager
+      build: Services/PresenceManager
+      image: "presencemanager"
+      restart: on-failure
+      networks:
+        snet:
+          ipv4_address: 172.18.0.37
+      depends_on:
+            presence_db:
+                condition: service_healthy
+
+networks:
+  snet:
+    ipam:
+      config:
+      - subnet: 172.18.0.0/16
+        ip_range: 172.28.5.0/24
