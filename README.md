@@ -16,7 +16,7 @@ Our proposal was based on the construction of a mobile application where the fun
 * Schedule and location voting process.
 
 #### Architecture
-![Project Architecture](architecture.png)
+![Project Architecture](imgs/architecture.png)
 
 # Tecnologies 
 * XMPP
@@ -38,4 +38,4 @@ Our proposal was based on the construction of a mobile application where the fun
 * Firebase
 
 # Mobile Application Interfaces
-![](../imgs/image1.png) ![](../imgs/image2.png) ![](../imgs/image3.png) ![](../imgs/image4.png) ![](../imgs/image5.png) ![](../imgs/image6.png)
+![](imgs/image1.png) ![](imgs/image2.png) ![](imgs/image3.png) ![](imgs/image4.png) ![](imgs/image5.png) ![](imgs/image6.png)
