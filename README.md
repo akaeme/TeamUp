@@ -38,4 +38,4 @@ Our proposal was based on the construction of a mobile application where the fun
 * Firebase
 
 # Mobile Application Interfaces
-![](imgs/image1.png) ![](imgs/image2.png) ![](imgs/image3.png) ![](imgs/image4.png) ![](imgs/image5.png) ![](imgs/image6.png)
+![](imgs/image_0.png) ![](imgs/image_1.png) ![](imgs/image_2.png) ![](imgs/image_3.png) ![](imgs/image_4.png) ![](imgs/image_5.png)
